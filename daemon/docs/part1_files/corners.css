@@ -1,0 +1,83 @@
+.corners{
+    position:relative;
+    margin:0px auto;
+    min-width:8em;
+    max-width:868px;/* based on image dimensions */
+    z-index:1;
+    margin-left:12px; /* default, width of left corner */
+}
+
+.corners .content,
+.corners .t,
+.corners .b,
+.corners .b div {
+    background:url(../template-images/layout/corners.png) no-repeat top right;
+    _background:url(../template-images/layout/corners.gif) no-repeat top right;
+}
+
+.corners .content {
+    position:relative;
+    zoom:1;
+    _overflow-y:hidden;
+    padding:12px 12px 0px 0px;
+}
+
+.corners .t {
+    /* top+left vertical slice */
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:12px; /* top slice width */
+    margin-left:-12px;
+    height:100%;
+    _height:1600px; /* arbitrary long height, IE 6 */
+    background-position:top left;
+}
+
+.corners .b {
+    /* bottom */
+    position:relative;
+    width:100%;
+}
+
+.corners .b,
+.corners .b div {
+    height:30px; /* height of bottom cap/shade */
+    font-size:1px;
+}
+
+.corners .b {
+    background-position:bottom right;
+}
+
+.corners .b div {
+    position:relative;
+    width:12px; /* bottom corner width */
+    margin-left:-12px;
+    background-position:bottom left;
+}
+
+.corners .hd,
+.corners .bd,
+.corners .ft {
+    position:relative;
+    margin-right: 4px;
+}
+
+.corners .wrapper {
+    /* extra content protector - preventing vertical overflow (past background) */
+    position:static;
+    max-height:1000px;
+    
+/*overflow:auto;*/ /* note that overflow:auto causes a rather annoying redraw "lag" in Firefox 2, and may degrade performance. Might be worth trying without if you aren't worried about height/overflow issues. */
+}
+
+.corners h1,
+.corners p {
+    margin:0px; /* margins will blow out backgrounds, leaving whitespace. */
+    padding:0.5em 0px 0.5em 0px;
+}
+
+.corners h1 {
+    padding-bottom:0px;
+}

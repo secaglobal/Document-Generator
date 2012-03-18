@@ -1,0 +1,39 @@
+/*** The Essential Code ***/
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* All the content boxes belong to the content class. */
+.column{
+    position:relative; /* Position is declared "relative" to gain control of stacking order (z-index). */
+}
+
+#maincontent{
+    min-width:120px;
+    margin:64px 216px 20px 216px;
+    width:auto;
+    min-height: 40em;
+}
+
+#navigation {
+    position:absolute;
+    width: 180px;
+    top:60px;
+    left:20px;
+    z-index:3;
+}
+
+#sidebar {
+    position:absolute;
+    top:60px;
+    right:20px;
+    width:180px;
+    z-index:1;
+}
+
+#footer{
+    padding: 0 28px 20px 23px;
+    z-index: 5;
+}

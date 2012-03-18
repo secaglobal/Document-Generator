@@ -1,0 +1,646 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0052)http://mikekneller.com/kb/python/libxml2python/part1 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link media="screen,projection" rel="stylesheet" type="text/css" href="./part1_files/undohtml.css"> <link media="screen,projection" rel="stylesheet" type="text/css" href="./part1_files/layout.css"> <link media="screen,projection" rel="stylesheet" type="text/css" href="./part1_files/layout_design.css"> <link media="screen,projection" rel="stylesheet" type="text/css" href="./part1_files/corners.css"> <link media="screen,projection" rel="stylesheet" type="text/css" href="./part1_files/content.css"> <link media="screen,projection" rel="stylesheet" type="text/css" href="./part1_files/form.css"> <!--[if IE 6]><link media="screen,projection" rel="stylesheet" type="text/css" href="../../../css/fixup_ie6.css"> </link><![endif]--><!--[if IE 7]><link media="screen,projection" rel="stylesheet" type="text/css" href="../../../css/fixup_ie7.css"> </link><![endif]--></head>
+  <body>
+    <div class="outer">
+      <div id="header">
+        <div class="tribal">
+          <h1>++|ukchill.com|++</h1>
+        </div>
+      </div>
+      <div id="container">
+        <div id="maincontent" class="column">
+          <div class="breadcrumb"><a href="http://mikekneller.com/kb/index">knowledge.base</a>&nbsp; »&nbsp; <a href="http://mikekneller.com/kb/python/index">python</a>&nbsp; »&nbsp; <a href="./part1_files/part1.html">libxml2</a></div>
+          <h2>Getting started with Libxml2 and Python</h2>
+          <p>Getting to grips with Libxml2 and Python can be a frustrating experience, 
+particularly as in-depth, accurate Python documentation is hard to find 
+on the Web.
+</p>
+          <p>Many Python developers seem to dislike the Libxml2 bindings, as they are 'un-Pythonic'
+and much too C-like. This however misses the point of Libxml2. The point being that
+this library is portable, mature, extremely full-featured and *very* fast.
+</p>
+          <p>In the process of writing this tutorial, I hung out in the #xml channel on 
+irc.gnome.org, and subscribed to the xml@gnome.org mailing list - I 
+was given a lot of help when things weren't obvious! Although there's not a massive 
+amount of activity on IRC, or in the mailing list on a daily basis, I would
+definitely recommend spending some time browsing the archive - or using Google
+to search it when you have questions. Additionally, I have found the people in 
+the Libxml2 community very helpful. 
+</p>
+          <p>Manipulating XML using Libxml2 is fairly straightforward when you have a couple
+of working examples, however that tends to be the problem in Python. Finding 
+working examples tends to be a bit of a hit-and-miss affair.
+</p>
+          <p>The first place to look is in the examples folder in the documentation installed
+with your release (/usr/share/doc/libxml2-python-2.6.27/examples on my machine).
+</p>
+          <p>TODO: where are the examples on a number of distributions/platforms?
+</p>
+          <p>Also, take a moment to scan through libxml2.py itself - this is the Python wrapper and
+is a good place to look if you are hunting for a particular function. There
+is plenty of information in the wrapper as all the docstrings have been 
+populated, you can always get information like
+</p>
+          <pre>	print libxml2.parseFile.__doc__
+</pre>
+          <p>for any particular function.
+</p>
+          <p>Also remember that you can list the available methods for any Python object by 
+using the dir function. The most immediately useful objects are <a href="http://mikekneller.com/kb/python/libxml2python/libxml2_objects" title="Libxml2 Objects and methods">xmlCore, xmlNode
+xmlDoc</a>, so
+</p>
+          <pre>	dir(libxml2.xmlCore)
+</pre>
+          <p>is your friend when working out what functions are available to you.
+</p>
+          <p>I'm going to assume that you know a bit about XML, at least enough to recognise
+an XML document when you see one, and hopefully enough about Python to know 
+where to find the documentation!
+</p>
+          <h3>Contents</h3>
+          <ul>
+  <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#installing_Libxml2">installing Libxml2</a>
+    <ul>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Loading_a_document">Loading a document</a></li>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#managing_your_memory">managing your memory</a></li>
+    </ul>
+  </li>
+  <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Working_with_the_document">Working with the document</a>
+    <ul>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Elements">Elements</a></li>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#XPath">XPath</a></li>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Namespaces">Namespaces</a></li>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Writing_to_to_a_file">Writing to to a file</a></li>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Modifying_documents">Modifying documents</a></li>
+    </ul>
+  </li>
+  <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#XSLT">XSLT</a></li>
+  <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Libxml2_and_HTML">Libxml2 and HTML</a></li>
+  <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Schema">Schema</a></li>
+  <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Known_Problems">Known Problems</a>
+    <ul>
+      <li><a href="http://mikekneller.com/kb/python/libxml2python/part1#Node_equality_Problem">Node equality Problem</a></li>
+    </ul>
+  </li>
+</ul>
+          <a name="installing_Libxml2" id="installing_Libxml2"></a>
+          <h2> <span class="mw-headline"> installing Libxml2 </span></h2>
+          <p>TODO: installation examples for a number of distros/platforms.
+</p>
+          <a name="Loading_a_document" id="Loading_a_document"></a>
+          <h3> <span class="mw-headline"> Loading a document </span></h3>
+          <p>The first thing you want to do in XML will be to load a document of some sort.
+As a new Libxml2 user, this is where our confusion starts! It is worth remembering
+that in general, the Python bindings are automatically generated - therefore
+there is an equivalent Python function for every C function, and sometimes this
+can lead to unnecessary, or apparently duplicated Python functions.
+</p>
+          <p>The library contains a number of different functions we can use to load an XML 
+document:
+</p>
+          <p>	parseDoc, parseFile, parseMemory, readDoc, readFd, readFile, readMemory,
+	recoverDoc and recoverFile
+</p>
+          <p>All of these functions return an xmlDoc object. Examples for using each of these
+follow:
+</p>
+          <p><br>
+	parseDoc(cur) - load an XML document from memory (a string)
+</p>
+          <pre>	doc = libxml2.parseDoc("""&lt;?xml version="1.0"?&gt;
+	&lt;root&gt;Hello world!&lt;/root&gt;""")	
+</pre>
+          <p>	parseMemory(buffer, size) - load an XML document from memory
+</p>
+          <pre>	doc = libxml2.parseMemory(xml, len(xml))
+</pre>
+          <p>This function performs exactly the same job as parseDoc from a Python perspective.
+</p>
+          <p><br>
+	parseFile(filename) - load an XML document from a file
+</p>
+          <pre>	
+	doc = libxml2.parseFile('test.xml')
+</pre>
+          <p>	readDoc(cur, URL, encoding, options) - load an XML document from memory (a string)
+</p>
+          <p>This version of the function allows you to specify options on a per-document
+basis. The parseDoc version uses the parser defaults (in practice, the 
+parser global settings, which can also be modified using global functions).
+</p>
+          <p>	In most cases,
+</p>
+          <pre>		doc = libxml2.readDoc('&lt;foo/&gt;',None,None,0)
+</pre>
+          <p>	will be equivalent to
+</p>
+          <pre>		doc = libxml2.parseDoc('&lt;foo/&gt;')
+</pre>
+          <p>When using XSL, I have found it better to force entities
+to be resolved before running the transform, in which case it is useful to
+use the following:
+</p>
+          <pre>	
+	doc = libxml2.readDoc( xml, None, libxml2.XML_PARSE_NOENT)
+</pre>
+          <p>	readFd(fd, URL, encoding, options) - load an XML document from a file descriptor
+</p>
+          <p>	readFile(filename, encoding, options) - load an XML document from a file allowing
+	the specification of per-document options.
+</p>
+          <p><br>	
+	readMemory(buffer, size, URL, encoding, options) - for Python, equivalent to
+	using readDoc
+</p>
+          <p><br>
+	recoverDoc(cur) - this is equivalent to readDoc, except that even broken XML
+	will result in a valid XML tree being created.
+</p>
+          <pre>	doc = libxml2.recoverDoc('&lt;foo&gt;&lt;broken&gt;&lt;/foo&gt;')
+</pre>
+          <p>will raise a parser error, but after the error has been handled, doc will
+contain:
+</p>
+          <pre>	&lt;?xml version="1.0"?&gt;
+	&lt;foo&gt;&lt;broken/&gt;&lt;/foo&gt;
+</pre>
+          <p>	recoverFile(filename) - same as recoverDoc, but for files.
+</p>
+          <p><br>
+In the simplest case, to load a file from disk you can do:
+</p>
+          <pre>	doc = libxml2.parseFile( 'test.xml' )
+</pre>
+          <a name="managing_your_memory" id="managing_your_memory"></a>
+          <h3> <span class="mw-headline"> managing your memory </span></h3>
+          <p>Ugh, nasty memory management. Isn't that why we're using Python, to avoid all that
+stuff?
+</p>
+          <p>Libxml2 does not explicitly handle the cleaning up of the memory it uses, so when 
+you finish working with your xmlDoc object, you need to remember to call freeDoc.
+The same is true of xpath evaluation contexts created with xpathNewContext, you
+call xpathFreeContext on them.
+</p>
+          <p>OK, so what we have now is something like the following:
+</p>
+          <pre>	doc = libxml2.parseFile( 'test.xml' )
+	# Do some stuff with the document here!
+	doc.freeDoc()
+</pre>
+          <p>It doesn't matter which method you use to create your xmlDoc object - each of the
+functions return the same thing, so just remember to call freeDoc on it when you
+are done and all will be well.
+</p>
+          <p><a href="http://mikekneller.com/wiki/index.php?title=Python_Libxml2_xmlDoc_wrapper" title="Python Libxml2 xmlDoc wrapper">There, that wasn't so hard was it? :-)</a>
+</p>
+          <a name="Working_with_the_document" id="Working_with_the_document"></a>
+          <h2> <span class="mw-headline"> Working with the document </span></h2>
+          <p>Now we have a working document, and know how to dispose of it when we're done
+it is time to look at a number of common XML operations and see how we can do
+those using Libxml2 and Python.
+</p>
+          <a name="Elements" id="Elements"></a>
+          <h3> <span class="mw-headline"> Elements </span></h3>
+          <p>The xmlDoc object has a large number of methods. As well as its own collection, 
+it inherits from xmlNode, which inherits from xmlCore; this gives you <a href="http://mikekneller.com/kb/python/libxml2python/libxml2_objects" title="Libxml2 Objects and methods">over 200
+available methods</a> to read up on! This is fairly daunting, when you can't find an
+example that shows you how to perform simple tasks but don't worry, In practice
+we can get by in most situations with a small fraction of these.
+</p>
+          <p>All valid XML documents contain a single root node, which contains all the
+other nodes.
+</p>
+          <p>You can get a reference to the root element using getRootElement on the document
+object. The root element is an xmlNode object, just like all other nodes in the 
+document. Working with nodes is fairly straightforward:
+</p>
+          <pre>	&gt;&gt;&gt; import libxml2
+	&gt;&gt;&gt; doc = libxml2.parseDoc( '&lt;foo&gt;Hello world.&lt;/foo&gt;' )
+	&gt;&gt;&gt; root = doc.getRootElement()
+	&gt;&gt;&gt; print root.name
+	foo
+	&gt;&gt;&gt; print root.content
+	Hello world.
+	&gt;&gt;&gt; root.setProp('bar', 'an attribute')
+	&lt;xmlAttr (bar) object at 0x13c00d0&gt;
+	&gt;&gt;&gt; root.prop('bar')
+	an attribute
+	&gt;&gt;&gt; print root.serialize()
+	&lt;foo bar="an attribute"&gt;Hello world.&lt;/foo&gt;
+	&gt;&gt;&gt; doc.freeDoc()
+</pre>
+          <p>The serialize method can be called on a single node, or on the document and 
+provides a string representation of the document.
+</p>
+          <p>Navigating through the document is not much more difficult - we can use the node
+properties (from the xmlCore ancestor object) to find the child nodes:
+</p>
+          <pre>	child = root.children
+	# the children property returns the FIRST child of a node
+	while child is not None:
+		if child.type == "element":
+			# do something with the child node
+			print child.name
+		child = child.next
+</pre>
+          <p>Accessing the attributes of a node is possible in a similar way
+</p>
+          <pre>	import libxml2
+	doc = libxml2.parseDoc('&lt;foo att1="value 1" att2="value 2"/&gt;')
+	root = doc.getRootElement()
+	for property in root.properties:
+		if property.type=='attribute':
+			# do something with the attributes
+			print property.name
+			print property.content
+	doc.freeDoc()
+</pre>
+          <p>Notice that in both looping through the children, and looping through the 
+properties there is a test for the type of the node. This is because in most
+documents, there is additional whitespace that shows up as well as the specific
+node types we are interested in.
+</p>
+          <a name="XPath" id="XPath"></a>
+          <h3> <span class="mw-headline"> XPath </span></h3>
+          <p>Navigating a document in this manner is straightforward, but tedious and requires
+accessing every node in the document until you get to the specific one you need.
+More often, you want to retrive a set of nodes or a single node matching some
+specific criteria. This is where XPath comes in, and Libxml2 has full support
+for XPath.
+</p>
+          <p>XPath queries can be run against the document or a specific element in the 
+document, but in either case the procedure is the same.
+</p>
+          <p>The xmlsoft.org Python page suggests the following:
+</p>
+          <pre>	doc = libxml2.parseFile("test.xml")
+	ctxt = doc.xpathNewContext()
+	result = ctxt.xpathEval("//*")
+	# do something with the result
+	
+	doc.freeDoc()
+	ctxt.xpathFreeContext()
+</pre>
+          <p>which involves creating an XPath context, running a query against it and then
+freeing the context when finished. If you have a lot of queries to run, then
+this is the best way to work, as the context can be re-used for each query.
+</p>
+          <p>In practice, the xmlCore object provides a helper function which wraps this up 
+for you. For single queries running xpathEval directly on the node will suffice, 
+just be aware that each query creates and destroys its own context, which is 
+going to be slower than the above implementation.
+</p>
+          <p>An XPath query will return a typed result, corresponding to the four basic types mentioned in the 
+introduction section of the <a href="http://www.w3.org/TR/xpath" class="external text" title="http://www.w3.org/TR/xpath" rel="nofollow">XPath Specification</a>, where the result is a 
+node-set this will be a tuple. This makes it easy to perform an operation on many nodes at once.
+</p>
+          <pre>	import libxml2
+	doc = libxml2.parseFile('test.xml')
+	# select every element in the document
+	result = doc.xpathEval('//*')
+	for node in result:
+		print node.name
+	doc.freeDoc()
+</pre>
+          <p>Apart from the call to freeDoc, I can't see how much more Pythonic it could be?
+</p>
+          <a name="Namespaces" id="Namespaces"></a>
+          <h3> <span class="mw-headline"> Namespaces </span></h3>
+          <p>Dealing with XML Namespaces is possible as well.
+</p>
+          <p>Here we create an XML document and declare a namespace on the root element.
+</p>
+          <pre>	import libxml2
+
+	doc = libxml2.newDoc('1.0')
+	root = libxml2.newNode('foo')
+	doc.setRootElement(root)
+
+	#Register the toto namespace
+	ns = root.newNs('http://toto.org', 'toto')
+
+        root.setNs(ns)  #put this node in the namespace
+
+	#Add to the root node a property in this namespace
+	root.setNsProp(ns, 'Id', str(12345))
+
+	print doc.serialize()
+</pre>
+          <p>This produces:
+</p>
+          <pre>	&lt;?xml version="1.0"?&gt;
+	&lt;toto:foo xmlns:toto="http://toto.org" toto:Id="12345"/&gt;
+</pre>
+          <p>Namespace can also be dealt with in XPath, provided you register the namespace with the XPath context object.
+</p>
+          <pre>	import libxml2
+	
+	doc = libxml2.parseDoc("""
+	&lt;foo xmlns:MYNS="http://somewhere.fr"&gt;
+	   &lt;MYNS:a id="a1"/&gt;
+	   &lt;a      id="a2"/&gt;
+	&lt;/foo&gt;
+	""")
+	
+	ctxt = doc.xpathNewContext()
+	#you can choose any name, the URI is the namespace identifier
+	ctxt.xpathRegisterNs("OtherName", "http://somewhere.fr") 
+	
+	# select the 'a' node in the somewhere.fr namespace
+	result = ctxt.xpathEval('//OtherName:a')
+	for node in result:	
+		print node.name, "id=%s"%node.prop("id")  #will display "a id=a1"
+
+	ctxt.xpathFreeContext()
+	doc.freeDoc()
+</pre>
+          <p>If a namespace by default is specified, you will have to register it in XPath with a name of your choice to use it in a XPath expression.
+</p>
+          <p><br>
+</p>
+          <a name="Writing_to_to_a_file" id="Writing_to_to_a_file"></a>
+          <h3> <span class="mw-headline"> Writing to to a file </span></h3>
+          <p>To write the contents of your XML document to a file, just use the saveTo method:
+</p>
+          <pre>	f = open('output.xml','w')
+	doc.saveTo(f)
+	f.close
+</pre>
+          <p>The saveTo method is also part of xmlCore, so you can use it to save the contents
+of just a single node and it's children as well as the whole document.
+</p>
+          <p>It is also worth noting that both saveTo, and serialize can accept an encoding parameter, which allows the conversion of a document from one encoding to another. Libxml2 itself uses UTF-8 internally, and will convert the document when loading and serialising.
+</p>
+          <pre>	&gt;&gt;&gt;&gt;doc = libxml2.parseDoc("""&lt;root&gt;&lt;foo&gt;hello&lt;/foo&gt;&lt;/root&gt;""")
+	&gt;&gt;&gt;&gt;str = doc.serialize()
+	&gt;&gt;&gt;&gt;print str
+	&lt;?xml version="1.0"?&gt;
+	&lt;root&gt;&lt;foo&gt;hello&lt;/foo&gt;&lt;/root&gt;
+
+	&gt;&gt;&gt;&gt;str = doc.serialize("iso-8859-1")
+	&gt;&gt;&gt;&gt;print str
+	&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;
+	&lt;root&gt;&lt;foo&gt;hello&lt;/foo&gt;&lt;/root&gt;
+</pre>
+          <a name="Modifying_documents" id="Modifying_documents"></a>
+          <h3> <span class="mw-headline"> Modifying documents </span></h3>
+          <p>To add a new node to a document, first we must create the node and then add it 
+as a child of the element it belongs to.
+</p>
+          <pre>	import libxml2
+	doc = libxml2.parseDoc('&lt;foo/&gt;')
+	root = doc.getRootElement()
+	newNode = libxml2.newNode('bar')
+	root.addChild(newNode)
+</pre>
+          <p>At this stage, our document contains
+</p>
+          <pre>	&lt;?xml version="1.0"?&gt;
+	&lt;foo&gt;&lt;bar/&gt;&lt;/foo&gt;
+</pre>
+          <p>Using the content property of newNode, we can do:
+</p>
+          <pre>	newNode.setContent('Hello')
+</pre>
+          <p>We can append some content to our <bar></bar> element by calling addContent,
+</p>
+          <pre>	newNode.addContent(' world')
+</pre>
+          <p>which gives us
+</p>
+          <pre>	&lt;?xml version="1.0"?&gt;
+	&lt;foo&gt;&lt;bar&gt;Hello world&lt;/bar&gt;&lt;/foo&gt;
+</pre>
+          <p>Creating or setting an attribute is easy to, we use the setProp method.
+</p>
+          <pre>	newNode.setProp('attribute', 'the value')
+</pre>
+          <p>If the attribute doesn't exist, it will be created otherwise it will just have
+its content changed.
+</p>
+          <p>Adding nodes at a particular location in the hierarchy is possible using 
+addNextSibling, or addPrevSibling. These operate in the same way as addChild, 
+except they operate on the node you wish to add next to, rather than to the
+parent.
+</p>
+          <pre>	sibling = libxml2.newNode('bar2') 
+	newNode.addPrevSibling(sibling)
+</pre>
+          <p>gives
+</p>
+          <pre>	&lt;?xml version="1.0"?&gt;
+	&lt;foo&gt;&lt;bar2/&gt;&lt;bar new attribute="the value"&gt;Hello world&lt;/bar&gt;&lt;/foo&gt;
+</pre>
+          <p>whereas
+</p>
+          <pre>	sibling = libxml2.newNode('bar2') 
+	newNode.addNextSibling(sibling)
+</pre>
+          <p>gives
+</p>
+          <pre>	&lt;?xml version="1.0"?&gt;
+	&lt;foo&gt;&lt;bar new attribute="the value"&gt;Hello world&lt;/bar&gt;&lt;bar2/&gt;&lt;/foo&gt;
+</pre>
+          <p>To insert text into the document, you create a text node with some content and
+add it in the same way
+</p>
+          <pre>	text = libxml2.newText('some text\n')
+	bar.addNextSibling(text)
+</pre>
+          <p>which leaves us with
+</p>
+          <pre>	&lt;?xml version="1.0"?&gt;
+	&lt;foo&gt;&lt;bar2/&gt;&lt;bar new attribute="the value"&gt;Hello world&lt;/bar&gt;some text
+	&lt;/foo&gt;
+</pre>
+          <p>To create content and nodes, the useful Libxml2 helper functions are newComment,
+newText and	newNode. You can also create a new node by copying one that already 
+exists. The xmlNode object has copyNode and copyProp methods which can be useful
+here.
+</p>
+          <p>To add these new nodes into a document, you need to use one of the following
+methods (directly on nodes rather than on the document), addChild, addContent,
+addNextSibling, addPrevSibling.
+</p>
+          <a name="XSLT" id="XSLT"></a>
+          <h2> <span class="mw-headline"> XSLT </span></h2>
+          <p>Libxml2 has a companion library called libxslt which provides support for
+XSL Transformations. I find the following example provides most of the 
+useful information for a Python coder:
+</p>
+          <pre>	def runTransform(xmlFile,xslFile):
+		out = ''
+		sourcedoc = libxml2.parseFile( xmlFile )
+		styledoc = libxml2.parseFile( xslFile )
+		style = libxslt.parseStylesheetDoc(styledoc)
+		result = style.applyStylesheet(sourcedoc, None)
+		out = style.saveResultToString( result )
+		style.freeStylesheet()
+		result.freeDoc()
+		sourcedoc.freeDoc()
+		return out
+</pre>
+          <p>Notice that there are three documents involved, each of which need to be 
+explicitly freed, the source, the stylesheet and the result. The starting point
+for documentation can be found here, <a href="http://xmlsoft.org/XSLT/python.html" class="external free" title="http://xmlsoft.org/XSLT/python.html" rel="nofollow">http://xmlsoft.org/XSLT/python.html</a>.
+</p>
+          <a name="Libxml2_and_HTML" id="Libxml2_and_HTML"></a>
+          <h2> <span class="mw-headline"> Libxml2 and HTML </span></h2>
+          <p>If you have spent any time poking around libxml2.py, you will probably have 
+noticed a number of functions that start with html. This is because Libxml2 has
+an HTML parser built in that does a pretty good job of loading real world 
+(in other words horribly broken) HTML documents. You can then use the features
+we have previously discussed to read or modify the HTML.
+</p>
+          <p>The following example will load pretty much any HTML file into an xmlDoc object
+</p>
+          <pre>	parse_options = libxml2.HTML_PARSE_RECOVER + \
+		libxml2.HTML_PARSE_NOERROR + \
+		libxml2.HTML_PARSE_NOWARNING
+	doc = libxml2.htmlReadDoc(html, '', None, parse_options)
+</pre>
+          <p>Here is a more complete example, which extracts all the links from the Guardian
+newspaper Website home page and prints the href attribute.
+</p>
+          <pre>	import urllib2
+	import libxml2
+
+	# Load the page into a string
+	f = urllib2.urlopen('http://www.guardian.co.uk')
+	html = f.read()
+	f.close()
+
+	parse_options = libxml2.HTML_PARSE_RECOVER + \
+		libxml2.HTML_PARSE_NOERROR + \
+		libxml2.HTML_PARSE_NOWARNING
+	doc = libxml2.htmlReadDoc(html,'',None,parse_options)
+	links = doc.xpathEval('//a')
+	for link in links:
+		href = link.xpathEval('attribute::href')
+		if len(href) &gt; 0:
+			href = href[0].content	
+			print href
+	doc.freeDoc()
+</pre>
+          <p>For a more comprehensive example, see <a href="http://mikekneller.com/kb/python/libxml2python/example_webscrape" title="Example of scraping content from a website">example of scraping content from a website</a>.
+</p>
+          <a name="Schema" id="Schema"></a>
+          <h2> <span class="mw-headline"> Schema </span></h2>
+          <p>One may validate an XML instance against a W3C schema, as shown below:
+</p>
+          <pre>	# inspired from the test suite file "xstc/xstc.py"
+	# thanks to Kasimier Buchcik
+	#
+	import libxml2
+
+	ctxt = libxml2.schemaNewParserCtxt("my-schema.wxs")
+	schema = ctxt.schemaParse()
+	del ctxt
+
+	validationCtxt = schema.schemaNewValidCtxt()
+
+	doc = libxml2.parseFile("test.xml")
+
+	#instance_Err = validationCtxt.schemaValidateFile(filePath, 0)
+	instance_Err = validationCtxt.schemaValidateDoc(doc)
+
+	del validationCtxt
+	del schema
+	doc.freeDoc()
+
+	if instance_Err != 0:
+            print "VALIDATION FAILED"
+	else:
+	    print "VALIDATED"
+</pre>
+          <a name="Known_Problems" id="Known_Problems"></a>
+          <h2> <span class="mw-headline"> Known Problems </span></h2>
+          <a name="Node_equality_Problem" id="Node_equality_Problem"></a>
+          <h3> <span class="mw-headline"> Node equality Problem</span></h3>
+          <p>The usual equality test (==) does not work, :-(, look at this:
+</p>
+          <pre>	&gt;&gt;&gt; import libxml2
+	&gt;&gt;&gt; doc = libxml2.parseDoc('&lt;foo/&gt;')
+	&gt;&gt;&gt; root1 = doc.getRootElement()
+	&gt;&gt;&gt; root2 = doc.getRootElement()
+	&gt;&gt;&gt; root1 == root2
+	False 
+</pre>
+          <p>(note: This issue affects earlier builds of Libxml2 for Python. It is referred to in <a href="http://bugzilla.gnome.org/show_bug.cgi?id=345779" class="external free" title="http://bugzilla.gnome.org/show_bug.cgi?id=345779" rel="nofollow">http://bugzilla.gnome.org/show_bug.cgi?id=345779</a> and appears to be resolved in current builds)
+</p>
+          <p>Using libxml2-2.6.27, this produces the expected result.
+</p>
+          <pre>	&gt;&gt;&gt; import libxml2 
+	&gt;&gt;&gt; doc = libxml2.parseDoc('&lt;foo/&gt;')
+	&gt;&gt;&gt; root1 = doc.getRootElement()
+	&gt;&gt;&gt; root2 = doc.getRootElement()
+	&gt;&gt;&gt; root1 == root2
+	True
+</pre>
+          <div class="eitherside">
+<span class="leftside">
+<a href="http://mikekneller.com/kb/python/index" title="Python knowledge base articles">back to index</a>
+</span>
+<span class="rightside">
+<a href="http://mikekneller.com/kb/python/libxml2python/part2" title="Getting started with Libxml2 and Python - Part 2">part 2</a>
+</span>
+</div>
+          <div class="comment-header">
+	  [<a href="http://mikekneller.com/commentform">post comment</a>]
+	  [<a href="http://mikekneller.com/contact">email me</a>]
+	</div>
+          <div class="page-comments"></div>
+        </div>
+      </div>
+      <div id="navigation" class="column"><div class="corners"><div class="content"><div class="wrapper"><div class="t"></div><div class="hd"><ul><li><a href="http://mikekneller.com/home">front.page</a></li><li><a href="http://mikekneller.com/blog/index">r4nd0m</a></li><li>
+	    +
+	  <a href="http://mikekneller.com/code/index">code</a></li><li>
+	    +
+	  <a href="http://mikekneller.com/audio/index">audiology</a></li><li>
+	    +
+	  <a href="http://mikekneller.com/photography/index">photonics</a></li><li>
+	    +
+	  <a href="http://mikekneller.com/electronics/index">electrography</a></li><li>
+	    -
+	  <a class="active" href="http://mikekneller.com/kb/index">knowledge.base</a><ul><li>
+	    +
+	  <a href="http://mikekneller.com/kb/general/index">general</a></li><li>
+	    -
+	  <a class="active" href="http://mikekneller.com/kb/python/index">python</a><ul><li><a class="active" href="./part1_files/part1.html">libxml2</a><ul></ul></li></ul></li></ul></li><li><a href="http://mikekneller.com/contact">contact</a></li></ul></div></div></div><div class="b"><div></div></div></div><img class="crypto" src="./part1_files/crypto.png"><!--[if IE 6]><div class="crypto_ie6"></div><![endif]--></div>
+      <div id="sidebar" class="column">
+        <div class="corners">
+          <div class="content">
+            <div class="wrapper">
+              <div class="t"></div>
+              <div class="hd">
+                <p class="userpanel" style="text-align:center;">
+    :: not logged in ::
+    </p>
+              </div>
+            </div>
+          </div>
+          <div class="b">
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <ul>
+          <li>
+            <a href="http://mikekneller.com/">mikekneller.com</a>
+          </li>
+          <li>
+            <a href="http://flickr.com/photos/mikekneller">flickr photostream</a>
+          </li>
+          <li>
+            <a href="http://www.linkedin.com/in/mikekneller">linkedin profile</a>
+          </li>
+        </ul>
+        <p>© 2009 <a href="http://mikekneller.com/contact">Mike Kneller</a></p>
+      </div>
+    </div>
+  
+
+</body></html>

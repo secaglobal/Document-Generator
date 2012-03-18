@@ -1,0 +1,82 @@
+/*** Just for Looks ***/
+
+/*******************
+ body bg    : 151515
+ content bg : 1c2024
+ *******************/
+
+body {
+    background: #151515 url(../template-images/layout/bg_grad.gif) repeat-x top;
+    font-family: arial, sans-serif;
+    padding: 0;
+}
+
+.outer {
+    position: absolute;
+    width: 100%;
+    min-width: 720px;
+    background: url(../template-images/fx/tile.png);
+    top: 0;
+    bottom: 0;
+}
+
+#header{
+}
+
+#footer{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding-top: 13px;
+    text-align: right;
+    height: 7px;
+    background: url(../template-images/footer1.png);
+}
+
+#footer p{
+    margin-right: 12px;
+}
+
+#footer ul{
+    float: left;
+    margin-left: 10px;
+}
+
+#footer li{
+    float: left;
+    margin-right: 24px;
+    background: url(../template-images/rt_arrow.png) no-repeat 0px 4px;
+    padding-left: 12px;
+}
+
+#maincontent{
+
+}
+
+.outer {
+
+}
+
+#container {
+
+}
+
+#navigation {
+
+}
+
+#header{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    z-index: 0;
+    height: 80px;
+}
+
+.tribal{
+    position: relative;
+    height: 80px;
+    background: url(../template-images/tribal.png) no-repeat bottom;
+    padding-top: 20px;
+    text-align: center;
+    opacity: .5;
+}

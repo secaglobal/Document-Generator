@@ -1,0 +1,11 @@
+<root>
+  <header>
+  </header>
+
+  <body>
+    <text id='title'>No title</title>
+    <table font-size=16 title-color="grey" />
+  </body>
+
+  <footer></footer>
+</root>

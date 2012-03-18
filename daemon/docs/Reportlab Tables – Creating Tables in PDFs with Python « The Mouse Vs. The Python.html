@@ -1,0 +1,747 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0098)http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"><head profile="http://gmpg.org/xfn/1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python</title>
+
+<meta name="generator" content="WordPress 3.3.1"> <!-- leave this for stats please -->
+<meta name="author" content="Ajay D&#39;Souza">
+<style type="text/css" media="screen">
+		@import url( http://www.blog.pythonlibrary.org/wp-content/themes/connections-reloaded/style.css );
+	</style>
+<link rel="icon" href="http://www.blog.pythonlibrary.org/favicon.ico" type="image/x-icon">
+<link rel="SHORTCUT ICON" href="http://www.blog.pythonlibrary.org/favicon.ico" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="The Mouse Vs. The Python Feed" href="http://feeds.feedburner.com/TheMouseVsThePython">
+<link rel="alternate" type="application/x-opera-widgets" title="The Mouse Vs. The Python Feed" href="http://widgets.opera.com/widgetize/Feed%20Reader/Advanced/?serve&skin=skin7&widgetname=The%20Mouse%20Vs.%20The%20Python&url=http://feeds.feedburner.com/TheMouseVsThePython&rel=myopera&ref=">
+<link rel="pingback" href="http://www.blog.pythonlibrary.org/xmlrpc.php">
+<link rel="archives" title="January 2012" href="http://www.blog.pythonlibrary.org/2012/01/">
+<link rel="archives" title="December 2011" href="http://www.blog.pythonlibrary.org/2011/12/">
+<link rel="archives" title="November 2011" href="http://www.blog.pythonlibrary.org/2011/11/">
+<link rel="archives" title="October 2011" href="http://www.blog.pythonlibrary.org/2011/10/">
+<link rel="archives" title="September 2011" href="http://www.blog.pythonlibrary.org/2011/09/">
+<link rel="archives" title="August 2011" href="http://www.blog.pythonlibrary.org/2011/08/">
+<link rel="archives" title="July 2011" href="http://www.blog.pythonlibrary.org/2011/07/">
+<link rel="archives" title="June 2011" href="http://www.blog.pythonlibrary.org/2011/06/">
+<link rel="archives" title="April 2011" href="http://www.blog.pythonlibrary.org/2011/04/">
+<link rel="archives" title="March 2011" href="http://www.blog.pythonlibrary.org/2011/03/">
+<link rel="archives" title="February 2011" href="http://www.blog.pythonlibrary.org/2011/02/">
+<link rel="archives" title="January 2011" href="http://www.blog.pythonlibrary.org/2011/01/">
+<link rel="archives" title="December 2010" href="http://www.blog.pythonlibrary.org/2010/12/">
+<link rel="archives" title="November 2010" href="http://www.blog.pythonlibrary.org/2010/11/">
+<link rel="archives" title="October 2010" href="http://www.blog.pythonlibrary.org/2010/10/">
+<link rel="archives" title="September 2010" href="http://www.blog.pythonlibrary.org/2010/09/">
+<link rel="archives" title="August 2010" href="http://www.blog.pythonlibrary.org/2010/08/">
+<link rel="archives" title="July 2010" href="http://www.blog.pythonlibrary.org/2010/07/">
+<link rel="archives" title="June 2010" href="http://www.blog.pythonlibrary.org/2010/06/">
+<link rel="archives" title="May 2010" href="http://www.blog.pythonlibrary.org/2010/05/">
+<link rel="archives" title="April 2010" href="http://www.blog.pythonlibrary.org/2010/04/">
+<link rel="archives" title="March 2010" href="http://www.blog.pythonlibrary.org/2010/03/">
+<link rel="archives" title="February 2010" href="http://www.blog.pythonlibrary.org/2010/02/">
+<link rel="archives" title="January 2010" href="http://www.blog.pythonlibrary.org/2010/01/">
+<link rel="archives" title="December 2009" href="http://www.blog.pythonlibrary.org/2009/12/">
+<link rel="archives" title="November 2009" href="http://www.blog.pythonlibrary.org/2009/11/">
+<link rel="archives" title="October 2009" href="http://www.blog.pythonlibrary.org/2009/10/">
+<link rel="archives" title="September 2009" href="http://www.blog.pythonlibrary.org/2009/09/">
+<link rel="archives" title="August 2009" href="http://www.blog.pythonlibrary.org/2009/08/">
+<link rel="archives" title="July 2009" href="http://www.blog.pythonlibrary.org/2009/07/">
+<link rel="archives" title="June 2009" href="http://www.blog.pythonlibrary.org/2009/06/">
+<link rel="archives" title="May 2009" href="http://www.blog.pythonlibrary.org/2009/05/">
+<link rel="archives" title="April 2009" href="http://www.blog.pythonlibrary.org/2009/04/">
+<link rel="archives" title="March 2009" href="http://www.blog.pythonlibrary.org/2009/03/">
+<link rel="archives" title="February 2009" href="http://www.blog.pythonlibrary.org/2009/02/">
+<link rel="archives" title="January 2009" href="http://www.blog.pythonlibrary.org/2009/01/">
+<link rel="archives" title="September 2008" href="http://www.blog.pythonlibrary.org/2008/09/">
+<link rel="archives" title="August 2008" href="http://www.blog.pythonlibrary.org/2008/08/">
+<link rel="archives" title="July 2008" href="http://www.blog.pythonlibrary.org/2008/07/">
+<link rel="archives" title="June 2008" href="http://www.blog.pythonlibrary.org/2008/06/">
+<link rel="archives" title="May 2008" href="http://www.blog.pythonlibrary.org/2008/05/">
+<link rel="archives" title="April 2008" href="http://www.blog.pythonlibrary.org/2008/04/">
+<link rel="archives" title="March 2008" href="http://www.blog.pythonlibrary.org/2008/03/">
+<link rel="alternate" type="application/rss+xml" title="The Mouse Vs. The Python » Reportlab Tables – Creating Tables in PDFs with Python Comments Feed" href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/feed/">
+<link rel="stylesheet" id="socialize-css" href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/socialize.css" type="text/css" media="all">
+<script src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/saved_resource" async=""></script><script type="text/javascript" async="" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/ga.js"></script><script type="text/javascript" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/jquery.js,qver=1.7.1.pagespeed.ce.b3kZSoXGj0.js"></script>
+<script type="text/javascript" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/comment-reply.js"></script>
+<script type="text/javascript">//<![CDATA[
+jQuery(document).ready(function(){jQuery('a').each(function(){var a=jQuery(this);var href=a.attr('href');if(href==undefined)
+return;var url=href.replace('http://','').replace('https://','');var hrefArray=href.split('.').reverse();var extension=hrefArray[0].toLowerCase();var hrefArray=href.split('/').reverse();var domain=hrefArray[2];var downloadTracked=false;if(jQuery.inArray(extension,analyticsFileTypes)!=-1){downloadTracked=true;a.click(function(){if(analyticsEventTracking=='enabled'){_gaq.push(['_trackEvent','Downloads',extension.toUpperCase(),href]);}else
+_gaq.push(['_trackPageview',analyticsDownloadsPrefix+url]);});}
+if((href.match(/^http/))&&(!href.match(document.domain))&&(downloadTracked==false)){a.click(function(){if(analyticsEventTracking=='enabled'){_gaq.push(['_trackEvent','Outbound Traffic',href.match(/:\/\/(.[^/]+)/)[1],href]);}else
+_gaq.push(['_trackPageview',analyticsOutboundPrefix+url]);});}});});
+//]]></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.blog.pythonlibrary.org/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.blog.pythonlibrary.org/wp-includes/wlwmanifest.xml">
+<link rel="prev" title="wxPython: A Simple Notebook Example" href="http://www.blog.pythonlibrary.org/2010/09/15/wxpython-a-simple-notebook-example/">
+<link rel="next" title="Book Preview: Python Graphics Cookbook" href="http://www.blog.pythonlibrary.org/2010/09/22/book-preview-python-graphics-cookbook/">
+<meta name="generator" content="WordPress 3.3.1">
+<link rel="canonical" href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">
+<link rel="shortlink" href="http://www.blog.pythonlibrary.org/?p=1218">
+<style type="text/css">
+#content pre {
+  border: 1px dashed #2f6fab;
+  padding: 0.5em; background-color: #fafafa;
+  overflow:auto;
+}
+#content pre ol { 
+  margin: 0; padding: 0;
+  margin-left: 2em; 
+}
+ 
+#content pre ol li {
+  margin: 0; padding: 0;
+  height: 1em;
+}
+ 
+/* used for testing...
+#content pre ol li div {
+  background-color: blue;
+  line-height: 1em;
+  border: 0; padding: 0;
+}*/
+</style><style type="text/css">
+#headimg{
+	background:#fff url(http://www.blog.pythonlibrary.org/wp-content/uploads/2011/01/finished_logo2.jpg) no-repeat bottom;
+}
+#headimg h1, #headimg #desc {
+	display: none;
+}
+</style>
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" media="all">
+/* <![CDATA[ */
+@import url("http://www.blog.pythonlibrary.org/wp-content/plugins/wp-table-reloaded/css/plugin.css?ver=1.9.3");
+@import url("http://www.blog.pythonlibrary.org/wp-content/plugins/wp-table-reloaded/css/datatables.css?ver=1.9.3");
+/* ]]> */
+</style><!-- Google Analytics Tracking by Google Analyticator 6.2: http://ronaldheft.com/code/analyticator/ -->
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-10932412-1']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_trackPageLoadTime']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<script type="text/javascript" async="" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/embed.js"></script><script type="text/javascript" async="" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/printfriendly.js"></script><script src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/thread.js" async="" charset="UTF-8"></script><link rel="stylesheet" type="text/css" href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/defaults.css"><script src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/disqus.js" async="" charset="UTF-8"></script><link rel="stylesheet" type="text/css" href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/dsq7884a9652e94555c70f96b6be63be216.css"><script src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/dsq7884a9652e94555c70f96b6be63be216.js" async="" charset="UTF-8"></script><script src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/all.js" async="" charset="UTF-8"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size: 11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size: 24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size: 14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100%
+}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yO/r/_j03izEX40U.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size: 12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size: 12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size: 16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}
+.fb_iframe_widget iframe{position:relative;vertical-align:text-bottom}
+.fb_iframe_widget span{position:relative}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_button_simple,
+.fb_button_simple_rtl{background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yH/r/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}
+.fb_button_simple_rtl{background-position:right 0}
+.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}
+.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}
+a.fb_button_simple:hover .fb_button_text,
+a.fb_button_simple_rtl:hover .fb_button_text,
+.fb_button_simple:hover .fb_button_text,
+.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}
+.fb_button,
+.fb_button_rtl{background:#29447e url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}
+.fb_button .fb_button_text,
+.fb_button_rtl .fb_button_text{background:#5f78ab url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}
+a.fb_button,
+a.fb_button_rtl,
+.fb_button,
+.fb_button_rtl{text-decoration:none}
+a.fb_button:active .fb_button_text,
+a.fb_button_rtl:active .fb_button_text,
+.fb_button:active .fb_button_text,
+.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}
+.fb_button_xlarge,
+.fb_button_xlarge_rtl{background-position:left -60px;font-size: 24px;line-height:30px}
+.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}
+a.fb_button_xlarge:active{background-position:left -99px}
+.fb_button_xlarge_rtl{background-position:right -268px}
+.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}
+a.fb_button_xlarge_rtl:active{background-position:right -307px}
+.fb_button_large,
+.fb_button_large_rtl{background-position:left -138px;font-size: 13px;line-height:16px}
+.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}
+a.fb_button_large:active{background-position:left -163px}
+.fb_button_large_rtl{background-position:right -346px}
+.fb_button_large_rtl .fb_button_text{margin-right:25px}
+a.fb_button_large_rtl:active{background-position:right -371px}
+.fb_button_medium,
+.fb_button_medium_rtl{background-position:left -188px;font-size: 11px;line-height:14px}
+a.fb_button_medium:active{background-position:left -210px}
+.fb_button_medium_rtl{background-position:right -396px}
+.fb_button_text_rtl,
+.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}
+a.fb_button_medium_rtl:active{background-position:right -418px}
+.fb_button_small,
+.fb_button_small_rtl{background-position:left -232px;font-size: 10px;line-height:10px}
+.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}
+a.fb_button_small:active,
+.fb_button_small:active{background-position:left -250px}
+.fb_button_small_rtl{background-position:right -440px}
+.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}
+a.fb_button_small_rtl:active{background-position:right -458px}
+.fb_share_count_wrapper{position:relative;float:left}
+.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;text-align:center}
+.fb_share_count_inner{background:#e8ebf2;display:block}
+.fb_share_count_right{margin-left:-1px;display:inline-block}
+.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size: 10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}
+.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size: 22px;border:solid 1px #b0b9ec}
+.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yU/r/bSOHtKbCGYI.png)}
+.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yX/r/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}
+.fb_share_no_count{display:none}
+.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size: 10px}
+.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size: 11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}
+.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size: 13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}
+.fb_share_count_hidden .fb_share_count_nub_top,
+.fb_share_count_hidden .fb_share_count_top,
+.fb_share_count_hidden .fb_share_count_nub_right,
+.fb_share_count_hidden .fb_share_count_right{visibility:hidden}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size: 13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size: 11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr{left:-4px}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_rtl{left:2px}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{left:0;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+/* @noflip */
+.fbpluginrecommendationsbarleft{left:10px}
+/* @noflip */
+.fbpluginrecommendationsbarright{right:10px}
+</style></head>
+<body data-rendering="true" pf-init="true"><iframe id="twttrHubFrame" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" name="twttrHubFrame" style="position: absolute; top: -9999em; width: 10px; height: 10px; " src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/hub.1326407570.html"></iframe>
+<div id="rap">
+<div id="header">
+<ul id="topnav">
+<li><a href="http://www.blog.pythonlibrary.org/" title="Home">Home</a></li>
+<li class="page_item page-item-2"><a href="http://www.blog.pythonlibrary.org/about/">About</a></li>
+<li class="page_item page-item-376"><a href="http://www.blog.pythonlibrary.org/contact/">Contact the Author</a></li>
+<li class="page_item page-item-1380"><a href="http://www.blog.pythonlibrary.org/follow/">Follow the Blog</a></li>
+<li class="page_item page-item-1972"><a href="http://www.blog.pythonlibrary.org/license/">License</a></li>
+<li class="page_item page-item-2122"><a href="http://www.blog.pythonlibrary.org/my-projects/">My Projects</a></li>
+</ul>
+<div id="headimg">
+<h1><a href="http://www.blog.pythonlibrary.org/" title="The Mouse Vs. The Python">The Mouse Vs. The Python</a></h1>
+<div id="desc">Python Programming from the Frontlines</div>
+</div>
+</div>
+<div id="main">
+<div id="content">
+<!--- middle (posts) column  content begin -->
+<div class="post">
+<p class="post-date">Tue 21 Sep 2010</p>
+<div class="post-info">
+<h2 class="post-title"><a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html" rel="bookmark" title="Permanent Link: Reportlab Tables – Creating Tables in PDFs with Python">Reportlab Tables – Creating Tables in PDFs with Python</a></h2>
+<p>Posted by Mike under <a href="http://www.blog.pythonlibrary.org/category/cross-platform/" title="View all posts in Cross-Platform" rel="category tag">Cross-Platform</a>, <a href="http://www.blog.pythonlibrary.org/category/python/" title="View all posts in Python" rel="category tag">Python</a>	<br>
+<a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#comments" title="Comment on Reportlab Tables – Creating Tables in PDFs with Python"><span class="dsq-postid" rel="1218 http://www.blog.pythonlibrary.org/?p=1218">[2] Comments</span></a></p>
+</div>
+<div class="post-content">
+<div class="socialize-in-content" style="float:left;"><div class="socialize-in-button socialize-in-button-left"><iframe allowtransparency="true" frameborder="0" scrolling="no" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/tweet_button.1326407570.html" class="twitter-share-button twitter-count-vertical" style="height: 62px; width: 55px; " title="Twitter Tweet Button"></iframe></div><div class="socialize-in-button socialize-in-button-left"><iframe src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/like.html" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px !important; height:65px;" allowtransparency="true"></iframe></div><div class="socialize-in-button socialize-in-button-left"><script type="text/javascript">
+			<!-- 
+			reddit_url = "http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/";
+			reddit_title = "Reportlab Tables &#8211; Creating Tables in PDFs with Python";	//-->
+		</script><script type="text/javascript" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/button2.js"></script><iframe src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/button2.html" height="69" width="51" scrolling="no" frameborder="0"></iframe></div><div class="socialize-in-button socialize-in-button-left"><div id="___plusone_0" style="height: 15px; width: 70px; display: inline-block; text-indent: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; background-position: initial initial; background-repeat: initial initial; "><iframe allowtransparency="true" frameborder="0" hspace="0" id="I1_1326533425992" marginheight="0" marginwidth="0" name="I1_1326533425992" scrolling="no" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/fastbutton.html" style="width: 70px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; height: 15px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="-1" vspace="0" width="100%" title="+1"></iframe></div></div></div><p>Back in March of this year, I wrote a <a href="http://www.blog.pythonlibrary.org/2010/03/08/a-simple-step-by-step-reportlab-tutorial/">simple tutorial</a> on Reportlab, a handy 3rd party Python package that allows the developer to create PDFs programmatically. Recently, I received a request to cover how to do tables in Reportlab. Since my Reportlab article is so popular, I figured it was probably worth the trouble to figure out tables. In this article, I will attempt to show you the basics of inserting tables into Reportlab generated PDFs.<span id="more-1218"></span></p>
+<p>One of the few issues I have with Reportlab is their user guide. It shows some good examples, but they’re almost always incomplete. Go download the user guide <a href="http://www.reportlab.com/software/opensource/rl-toolkit/guide/">here</a> and start reading chapter seven (the chapter on tables) and you’ll quickly see the following code snippet:</p>
+<pre class="python">LIST_STYLE = TableStyle<span style="color: black;">(</span>
+    <span style="color: black;">[</span><span style="color: black;">(</span><span style="color: #483d8b;">'LINEABOVE'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>, <span style="color: #ff4500;">2</span>, colors.<span style="color: black;">green</span><span style="color: black;">)</span>,
+    <span style="color: black;">(</span><span style="color: #483d8b;">'LINEABOVE'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>, <span style="color: #ff4500;">0.25</span>, colors.<span style="color: black;">black</span><span style="color: black;">)</span>,
+    <span style="color: black;">(</span><span style="color: #483d8b;">'LINEBELOW'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>, <span style="color: #ff4500;">2</span>, colors.<span style="color: black;">green</span><span style="color: black;">)</span>,
+    <span style="color: black;">(</span><span style="color: #483d8b;">'ALIGN'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>, <span style="color: #483d8b;">'RIGHT'</span><span style="color: black;">)</span><span style="color: black;">]</span>
+<span style="color: black;">)</span></pre>
+<p>Of course, this snippet is completely un-runnable and the text around it is pretty useless for figuring out how to import <strong>TableStyle</strong> and <strong>colors</strong>. It sounds like you can get all the Table stuff from the Flowable class (pg 76 – first page of chapter 7). Unfortunately, there is no “reportlab.Flowable”. You have to know that all the flowables come from something called <strong>platypus</strong>. Let’s stop here and talk about what a “flowable” is. Here what the user guide says:</p>
+<p><em><br>
+Flowables are things which can be drawn and which have wrap, draw and perhaps split methods. Flowable is an abstract base class for things to be drawn and an instance knows its size and draws in its own coordinate system (this requires the base API to provide an absolute coordinate system when the Flowable.draw method is called). To get an instance use f=Flowable().</em> (pg 62, section 5.3). Note that nowhere on that page does it show how to get the Flowable class. I only found out how by doing a text search of their source. Here’s the syntax: <em>from reportlab.platypus import Flowable</em></p>
+<p>It’s this sort of thing that made me almost give up on using Reportlab at all several years ago. Fortunately, my boss made me figure it out and had some real examples for me to follow. Alright, enough ranting. On with the tables tutorial!</p>
+<h2>Getting Started with Reportlab Tables</h2>
+<p>We’re actually going to take some of the table examples from the Reportlab User Guide and make them runnable. I’ll try to explain what’s going on in the code, but you may want to refer to the guide as well. Let’s start with the example on pg 78 entitled <em>TableStyle Cell Formatting Commands</em>. This first real example shows how to create a table with multiple colors, but no visible grid. Let’s make it runnable!</p>
+<pre class="python"><span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">lib</span> <span style="color: #ff7700;font-weight:bold;">import</span> colors
+<span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">lib</span>.<span style="color: black;">pagesizes</span> <span style="color: #ff7700;font-weight:bold;">import</span> letter
+<span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">platypus</span> <span style="color: #ff7700;font-weight:bold;">import</span> SimpleDocTemplate, Table, TableStyle
+&nbsp;
+doc = SimpleDocTemplate<span style="color: black;">(</span><span style="color: #483d8b;">"simple_table.pdf"</span>, pagesize=letter<span style="color: black;">)</span>
+<span style="color: #808080; font-style: italic;"># container for the 'Flowable' objects</span>
+elements = <span style="color: black;">[</span><span style="color: black;">]</span>
+&nbsp;
+data= <span style="color: black;">[</span><span style="color: black;">[</span><span style="color: #483d8b;">'00'</span>, <span style="color: #483d8b;">'01'</span>, <span style="color: #483d8b;">'02'</span>, <span style="color: #483d8b;">'03'</span>, <span style="color: #483d8b;">'04'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'10'</span>, <span style="color: #483d8b;">'11'</span>, <span style="color: #483d8b;">'12'</span>, <span style="color: #483d8b;">'13'</span>, <span style="color: #483d8b;">'14'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'20'</span>, <span style="color: #483d8b;">'21'</span>, <span style="color: #483d8b;">'22'</span>, <span style="color: #483d8b;">'23'</span>, <span style="color: #483d8b;">'24'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'30'</span>, <span style="color: #483d8b;">'31'</span>, <span style="color: #483d8b;">'32'</span>, <span style="color: #483d8b;">'33'</span>, <span style="color: #483d8b;">'34'</span><span style="color: black;">]</span><span style="color: black;">]</span>
+t=Table<span style="color: black;">(</span>data<span style="color: black;">)</span>
+t.<span style="color: black;">setStyle</span><span style="color: black;">(</span>TableStyle<span style="color: black;">(</span><span style="color: black;">[</span><span style="color: black;">(</span><span style="color: #483d8b;">'BACKGROUND'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-2</span>,<span style="color: #ff4500;">-2</span><span style="color: black;">)</span>,colors.<span style="color: black;">green</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'TEXTCOLOR'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,colors.<span style="color: black;">red</span><span style="color: black;">)</span><span style="color: black;">]</span><span style="color: black;">)</span><span style="color: black;">)</span>
+elements.<span style="color: black;">append</span><span style="color: black;">(</span>t<span style="color: black;">)</span>
+<span style="color: #808080; font-style: italic;"># write the document to disk</span>
+doc.<span style="color: black;">build</span><span style="color: black;">(</span>elements<span style="color: black;">)</span></pre>
+<p>If you run this code, you should see something like this centered along the top of your PDF:</p>
+<p><a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/table_with_no_grid.png"><img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/table_with_no_grid.png" alt="table_with_no_grid.png" title="table_with_no_grid.png" width="220" height="141" class="aligncenter size-full wp-image-1219"></a></p>
+<p>If you look at the code, you’ll notice that we have a series of imports. We import <strong>colors </strong>from “reportlab.lib”, <strong>letter</strong> from “reportlab.lib.pagesizes” and <strong>SimpleDocTemplate</strong>, <strong>Table</strong>, and <strong>TableStyle</strong> from “reportlab.platypus”. The imports are pretty self-explanatory, but they also help us familiarize ourselves with the way that Reportlab’s code is laid out. If we need other Flowables, like Paragraph, we can probably assume that it would come from “reportlab.platypus” since Table is a Flowable. If you try it, you’ll see that this assumption is correct.</p>
+<p>Next we create a document template using the <strong>SimpleDocTemplate</strong> class. The first argument is the path to the PDF that we want to create and the second argument is the page size. In this example, we just put in the name of the document. This will cause the script to put the PDF in the same folder that it’s run from. For reasons that I’ve never seen explained, you use a list to hold the flowables. In this code, we call our list “elements”. In the user guide, they call it “story”. </p>
+<p>The <strong>data</strong> list holds the data that will go in our table. The list is a list of lists. The table will 5 columns wide (the length of the nested lists) and 4 rows tall (the number of nested lists). We pass this list into our <strong>Table</strong> class to create the Table in memory and then call our Table instance’s setStyle method to change the style. To do this, we pass it a <strong>TableStyle</strong> class, which contains the styles we want to apply. In this case, we want to apply a green background color from the cells in column 2, row 2 to column 3, row 2. Note that the columns and rows are zero-based so 0 = 1, 1 = 2, etc. Also notice that the example uses (-2, -2) rather than the much easier to understand (3, 2). This illustrates that you can also specify settings from the lower right corner instead of just doing everything from the top left. Unfortunately, the coordinate system starting on the lower right starts at (-1,-1) and that makes it a little harder to get one’s mind around.</p>
+<p>Then we set the text color to red in the first two columns. I admit that I’m not quite sure how this works as the ending coordinates just don’t seem to fit with the ones for the background color. I’ll leave that to my readers to explain.</p>
+<p>Finally, we append the table to our elements list and then call our document instance’s <strong>build</strong> method with the elements list as its only argument. This causes the document to be build and the PDF created. Now you have a PDF table!</p>
+<h2>Adding a Grid to the Table</h2>
+<p><a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/table_with_grid.png"><img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/table_with_grid.png" alt="table_with_grid.png" title="table_with_grid.png" width="251" height="198" class="aligncenter size-full wp-image-1226"></a></p>
+<p>Let’s take the next example from the Reportlab documentation and see if we can get it to run too. This next example shows how to add a visible grid to the table as well as how to position the text within the cells.</p>
+<pre class="python"><span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">lib</span> <span style="color: #ff7700;font-weight:bold;">import</span> colors
+<span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">lib</span>.<span style="color: black;">pagesizes</span> <span style="color: #ff7700;font-weight:bold;">import</span> letter, inch
+<span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">platypus</span> <span style="color: #ff7700;font-weight:bold;">import</span> SimpleDocTemplate, Table, TableStyle
+&nbsp;
+doc = SimpleDocTemplate<span style="color: black;">(</span><span style="color: #483d8b;">"simple_table_grid.pdf"</span>, pagesize=letter<span style="color: black;">)</span>
+<span style="color: #808080; font-style: italic;"># container for the 'Flowable' objects</span>
+elements = <span style="color: black;">[</span><span style="color: black;">]</span>
+&nbsp;
+data= <span style="color: black;">[</span><span style="color: black;">[</span><span style="color: #483d8b;">'00'</span>, <span style="color: #483d8b;">'01'</span>, <span style="color: #483d8b;">'02'</span>, <span style="color: #483d8b;">'03'</span>, <span style="color: #483d8b;">'04'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'10'</span>, <span style="color: #483d8b;">'11'</span>, <span style="color: #483d8b;">'12'</span>, <span style="color: #483d8b;">'13'</span>, <span style="color: #483d8b;">'14'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'20'</span>, <span style="color: #483d8b;">'21'</span>, <span style="color: #483d8b;">'22'</span>, <span style="color: #483d8b;">'23'</span>, <span style="color: #483d8b;">'24'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'30'</span>, <span style="color: #483d8b;">'31'</span>, <span style="color: #483d8b;">'32'</span>, <span style="color: #483d8b;">'33'</span>, <span style="color: #483d8b;">'34'</span><span style="color: black;">]</span><span style="color: black;">]</span>
+t=Table<span style="color: black;">(</span>data,<span style="color: #ff4500;">5</span><span style="color: #66cc66;">*</span><span style="color: black;">[</span><span style="color: #ff4500;">0.4</span><span style="color: #66cc66;">*</span>inch<span style="color: black;">]</span>, <span style="color: #ff4500;">4</span><span style="color: #66cc66;">*</span><span style="color: black;">[</span><span style="color: #ff4500;">0.4</span><span style="color: #66cc66;">*</span>inch<span style="color: black;">]</span><span style="color: black;">)</span>
+t.<span style="color: black;">setStyle</span><span style="color: black;">(</span>TableStyle<span style="color: black;">(</span><span style="color: black;">[</span><span style="color: black;">(</span><span style="color: #483d8b;">'ALIGN'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-2</span>,<span style="color: #ff4500;">-2</span><span style="color: black;">)</span>,<span style="color: #483d8b;">'RIGHT'</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'TEXTCOLOR'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-2</span>,<span style="color: #ff4500;">-2</span><span style="color: black;">)</span>,colors.<span style="color: black;">red</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'VALIGN'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: #483d8b;">'TOP'</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'TEXTCOLOR'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,colors.<span style="color: black;">blue</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'ALIGN'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: #483d8b;">'CENTER'</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'VALIGN'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: #483d8b;">'MIDDLE'</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'TEXTCOLOR'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,colors.<span style="color: black;">green</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'INNERGRID'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>, <span style="color: #ff4500;">0.25</span>, colors.<span style="color: black;">black</span><span style="color: black;">)</span>,
+                       <span style="color: black;">(</span><span style="color: #483d8b;">'BOX'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>, <span style="color: #ff4500;">0.25</span>, colors.<span style="color: black;">black</span><span style="color: black;">)</span>,
+                       <span style="color: black;">]</span><span style="color: black;">)</span><span style="color: black;">)</span>
+&nbsp;
+elements.<span style="color: black;">append</span><span style="color: black;">(</span>t<span style="color: black;">)</span>
+<span style="color: #808080; font-style: italic;"># write the document to disk</span>
+doc.<span style="color: black;">build</span><span style="color: black;">(</span>elements<span style="color: black;">)</span></pre>
+<p>We have one new import here from the <strong>pagesizes</strong> library: <strong>inch</strong>. The “inch” just gives us a simple way to set sizes or margins in our PDF. In this case, we use it to set the table’s column widths and row heights. The next change is in <em>setStyle </em>section of the code and this is really the key to getting tables to look the way you want. The <em>TableStyle</em> class controls the look of the table completely. For example, the first two lines align the middle six cells to the right and color them red. The next two lines set the four cells in the first column to the color blue and to the text to the top of the cell. You can figure out the three lines on your own.</p>
+<p>The last two lines of code draw the inner grid and the box around the grid. Then we append the table to our elements list and finally, build the document.</p>
+<h2>Creating Complex Cell Values</h2>
+<p>The last major example we’re going to look at is the Complex Cell Values example from the Reportlab user guide. This one shows you to insert other Reportlab Flowables in the cells themselves. Let’s take a quick look!</p>
+<pre class="python"><span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">lib</span> <span style="color: #ff7700;font-weight:bold;">import</span> colors
+<span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">lib</span>.<span style="color: black;">pagesizes</span> <span style="color: #ff7700;font-weight:bold;">import</span> letter, inch
+<span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">platypus</span> <span style="color: #ff7700;font-weight:bold;">import</span> Image, Paragraph, SimpleDocTemplate, Table
+<span style="color: #ff7700;font-weight:bold;">from</span> reportlab.<span style="color: black;">lib</span>.<span style="color: black;">styles</span> <span style="color: #ff7700;font-weight:bold;">import</span> getSampleStyleSheet
+&nbsp;
+doc = SimpleDocTemplate<span style="color: black;">(</span><span style="color: #483d8b;">"complex_cell_values.pdf"</span>, pagesize=letter<span style="color: black;">)</span>
+<span style="color: #808080; font-style: italic;"># container for the 'Flowable' objects</span>
+elements = <span style="color: black;">[</span><span style="color: black;">]</span>
+&nbsp;
+styleSheet = getSampleStyleSheet<span style="color: black;">(</span><span style="color: black;">)</span>
+&nbsp;
+I = Image<span style="color: black;">(</span><span style="color: #483d8b;">'replogo.gif'</span><span style="color: black;">)</span>
+I.<span style="color: black;">drawHeight</span> = <span style="color: #ff4500;">1.25</span><span style="color: #66cc66;">*</span>inch<span style="color: #66cc66;">*</span>I.<span style="color: black;">drawHeight</span> / I.<span style="color: black;">drawWidth</span>
+I.<span style="color: black;">drawWidth</span> = <span style="color: #ff4500;">1.25</span><span style="color: #66cc66;">*</span>inch
+P0 = Paragraph<span style="color: black;">(</span><span style="color: #483d8b;">''</span><span style="color: #483d8b;">'
+               &lt;b&gt;A pa&lt;font color=red&gt;r&lt;/font&gt;a&lt;i&gt;graph&lt;/i&gt;&lt;/b&gt;
+               &lt;super&gt;&lt;font color=yellow&gt;1&lt;/font&gt;&lt;/super&gt;'</span><span style="color: #483d8b;">''</span>,
+               styleSheet<span style="color: black;">[</span><span style="color: #483d8b;">"BodyText"</span><span style="color: black;">]</span><span style="color: black;">)</span>
+P = Paragraph<span style="color: black;">(</span><span style="color: #483d8b;">''</span><span style="color: #483d8b;">'
+    &lt;para align=center spaceb=3&gt;The &lt;b&gt;ReportLab Left
+    &lt;font color=red&gt;Logo&lt;/font&gt;&lt;/b&gt;
+    Image&lt;/para&gt;'</span><span style="color: #483d8b;">''</span>,
+    styleSheet<span style="color: black;">[</span><span style="color: #483d8b;">"BodyText"</span><span style="color: black;">]</span><span style="color: black;">)</span>
+data= <span style="color: black;">[</span><span style="color: black;">[</span><span style="color: #483d8b;">'A'</span>, <span style="color: #483d8b;">'B'</span>, <span style="color: #483d8b;">'C'</span>, P0, <span style="color: #483d8b;">'D'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'00'</span>, <span style="color: #483d8b;">'01'</span>, <span style="color: #483d8b;">'02'</span>, <span style="color: black;">[</span>I,P<span style="color: black;">]</span>, <span style="color: #483d8b;">'04'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'10'</span>, <span style="color: #483d8b;">'11'</span>, <span style="color: #483d8b;">'12'</span>, <span style="color: black;">[</span>P,I<span style="color: black;">]</span>, <span style="color: #483d8b;">'14'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'20'</span>, <span style="color: #483d8b;">'21'</span>, <span style="color: #483d8b;">'22'</span>, <span style="color: #483d8b;">'23'</span>, <span style="color: #483d8b;">'24'</span><span style="color: black;">]</span>,
+       <span style="color: black;">[</span><span style="color: #483d8b;">'30'</span>, <span style="color: #483d8b;">'31'</span>, <span style="color: #483d8b;">'32'</span>, <span style="color: #483d8b;">'33'</span>, <span style="color: #483d8b;">'34'</span><span style="color: black;">]</span><span style="color: black;">]</span>
+&nbsp;
+t=Table<span style="color: black;">(</span>data,style=<span style="color: black;">[</span><span style="color: black;">(</span><span style="color: #483d8b;">'GRID'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-2</span>,<span style="color: #ff4500;">-2</span><span style="color: black;">)</span>,<span style="color: #ff4500;">1</span>,colors.<span style="color: black;">green</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BOX'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: #ff4500;">2</span>,colors.<span style="color: black;">red</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'LINEABOVE'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">1</span>,<span style="color: #ff4500;">2</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-2</span>,<span style="color: #ff4500;">2</span><span style="color: black;">)</span>,<span style="color: #ff4500;">1</span>,colors.<span style="color: black;">blue</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'LINEBEFORE'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">2</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">2</span>,<span style="color: #ff4500;">-2</span><span style="color: black;">)</span>,<span style="color: #ff4500;">1</span>,colors.<span style="color: black;">pink</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BACKGROUND'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">0</span>, <span style="color: #ff4500;">0</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">0</span>, <span style="color: #ff4500;">1</span><span style="color: black;">)</span>, colors.<span style="color: black;">pink</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BACKGROUND'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">1</span>, <span style="color: #ff4500;">1</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">1</span>, <span style="color: #ff4500;">2</span><span style="color: black;">)</span>, colors.<span style="color: black;">lavender</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BACKGROUND'</span>, <span style="color: black;">(</span><span style="color: #ff4500;">2</span>, <span style="color: #ff4500;">2</span><span style="color: black;">)</span>, <span style="color: black;">(</span><span style="color: #ff4500;">2</span>, <span style="color: #ff4500;">3</span><span style="color: black;">)</span>, colors.<span style="color: black;">orange</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BOX'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: #ff4500;">2</span>,colors.<span style="color: black;">black</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'GRID'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">0</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">-1</span>,<span style="color: #ff4500;">-1</span><span style="color: black;">)</span>,<span style="color: #ff4500;">0.5</span>,colors.<span style="color: black;">black</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'VALIGN'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: #483d8b;">'BOTTOM'</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BACKGROUND'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">0</span><span style="color: black;">)</span>,colors.<span style="color: black;">limegreen</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BACKGROUND'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,colors.<span style="color: black;">khaki</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'ALIGN'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">1</span><span style="color: black;">)</span>,<span style="color: #483d8b;">'CENTER'</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'BACKGROUND'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">2</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">2</span><span style="color: black;">)</span>,colors.<span style="color: black;">beige</span><span style="color: black;">)</span>,
+                    <span style="color: black;">(</span><span style="color: #483d8b;">'ALIGN'</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">2</span><span style="color: black;">)</span>,<span style="color: black;">(</span><span style="color: #ff4500;">3</span>,<span style="color: #ff4500;">2</span><span style="color: black;">)</span>,<span style="color: #483d8b;">'LEFT'</span><span style="color: black;">)</span>,
+<span style="color: black;">]</span><span style="color: black;">)</span>
+t._argW<span style="color: black;">[</span><span style="color: #ff4500;">3</span><span style="color: black;">]</span>=<span style="color: #ff4500;">1.5</span><span style="color: #66cc66;">*</span>inch
+&nbsp;
+elements.<span style="color: black;">append</span><span style="color: black;">(</span>t<span style="color: black;">)</span>
+<span style="color: #808080; font-style: italic;"># write the document to disk</span>
+doc.<span style="color: black;">build</span><span style="color: black;">(</span>elements<span style="color: black;">)</span></pre>
+<p>This snippet has a couple new imports. First off, we need access to <strong>Image </strong>and <strong>Paragraph</strong>, which are part of the <strong>platypus </strong>lib. We also need to be able to use <strong>getSampleStyleSheet</strong>, so we import that from the <strong>styles </strong>lib. Paragraphs are flowables that allow us to use HTML-like syntax to style our text and insert images, although we don’t do the image insertion in this manner in this particular example. </p>
+<p>Anyway, once again, the style is where the action is. In this example, we take a shortcut and pass the style directly into the Table object using its <strong>style</strong> parameter instead of using the Table’s “setStyle” method in combination with the TableStyle class. The result would have been the same if we had done it that way though. You should be able to parse the style yourself at this point. The only real difference was where we added the Paragraph and Image instances to the data list.</p>
+<h2>Other Odds and Ends</h2>
+<p>There are just a few other things to mention about Tables that didn’t really fit with the previous examples. Reportlab provides the ability to split tables when there are too many rows to fit on the page. This is enabled by default. According to the documentation, there is no way to split by column currently, so don’t bother trying to insert an extra-wide column.</p>
+<p>The Table also has <strong>repeatRows</strong> and <strong>repeatCols</strong> parameters. The repeatRows parameter controls how many rows to repeat on a split. The repeatCols parameter is not currently implemented. To be honest, I’m not even sure why this parameter is even included. It’s been there for quite a while and it still does nothing.</p>
+<h2>Wrapping Up</h2>
+<p>Now you should have a good foundation for PDF table creation using the Reportlab toolkit. This article just scratches the surface of what Reportlab can do, so be sure to read the documentation, the tests and the various other examples on their website to truly understand the power within this handy toolkit.</p>
+<h2>Further Reading</h2>
+<ul>
+<li>Reportlab <a href="http://www.reportlab.com/software/opensource/">Open Source</a></li>
+<li>A Reportlab <a href="" http:="" www.blog.pythonlibrary.org="" 2010="" 03="" 08="" a-simple-step-by-step-reportlab-tutorial="" "="">Tutorial</a></li>
+</ul>
+<h2>Downloads</h2>
+<ul>
+<li><a href="http://www.blog.pythonlibrary.org/wp-content/uploads/2010/09/reportlab_tables.zip">reportlab_tables.zip</a></li>
+<li><a href="http://www.blog.pythonlibrary.org/wp-content/uploads/2010/09/reportlab_tables.tar">reportlab_tables.tar</a></li>
+</ul>
+<div class="printfriendly alignleft"><a href="http://www.printfriendly.com/print/v2?url=http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/" rel="nofollow" onclick="window.print(); return false;"><img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/pf-button.gif" alt="Print Friendly"></a></div>	<div class="post-info">
+</div>
+<!--
+		<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+			xmlns:dc="http://purl.org/dc/elements/1.1/"
+			xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+		<rdf:Description rdf:about="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/"
+    dc:identifier="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/"
+    dc:title="Reportlab Tables &#8211; Creating Tables in PDFs with Python"
+    trackback:ping="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/trackback/" />
+</rdf:RDF>	-->
+<div class="post-footer">&nbsp;</div>
+</div>	<div class="navigation">
+<div class="aligncenter">« <a href="http://www.blog.pythonlibrary.org/2010/09/15/wxpython-a-simple-notebook-example/" rel="prev">wxPython: A Simple Notebook Example</a> | <a href="http://www.blog.pythonlibrary.org/2010/09/22/book-preview-python-graphics-cookbook/" rel="next">Book Preview: Python Graphics Cookbook</a> »</div>
+</div>
+<div class="post-footer">&nbsp;</div>
+<div id="disqus_thread"><div id="dsq-content" style="display: block; " class="clearfix">      <div id="dsq-global-toolbar" class="dsq-clearfix">        <ul class="dsq-global-toolbar-right dsq-clearfix">                            <li class="dsq-community-box">                <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-toolbar-item dsq-tt" onclick="DISQUS.dtpl.actions.fire(&#39;community.show&#39;); return false" title="Expand Community Box"><span class="dsq-toolbar-icon"></span></a>            </li>                            <li class="dsq-global-toolbar-dropdown-container">                    <div id="dsq-toolbar-dropdown">    <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-toolbar-logo dsq-toolbar-item dsq-clearfix"><span class="dsq-toolbar-icon">Disqus</span></a>    <div id="dsq-toolbar-dropdown-wrap" style="display: none">      <ul class="dsq-clearfix">                    <li class="dsq-login-link"><a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" onclick="DISQUS.dtpl.actions.fire(&#39;auth.login&#39;); return false"><span class="dsq-toolbar-icon"></span><span class="dsq-toolbar-label">Login</span></a></li>                    <li class="dsq-about-link"><a href="http://disqus.com/" target="_blank"><span class="dsq-toolbar-icon"></span><span class="dsq-toolbar-label">About Disqus</span></a></li>      </ul>    </div>  </div>            </li>        </ul>                <ul class="dsq-global-toolbar-left dsq-clearfix">            <li class="dsq-like-thread">                <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" id="dsq-like-thread-button" class="dsq-toolbar-item dsq-clearfix  dsq-tt" onclick="DISQUS.dtpl.actions.fire(&#39;thread.vote&#39;, 1); return false;" title="I like this page">                    <span class="dsq-toolbar-icon"></span>                    <span class="dsq-toolbar-label">Like</span>                </a>            </li>            <li class="dsq-dislike-thread">                <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" id="dsq-dislike-thread-button" class="dsq-toolbar-item dsq-clearfix  dsq-tt" onclick="DISQUS.dtpl.actions.fire(&#39;thread.vote&#39;, -1); return false" title="I don&#39;t like this page">                    <span class="dsq-toolbar-icon">Dislike</span>                </a>            </li>            <li class="dsq-like-panel">                <ul class="dsq-like-faces dsq-clearfix">                          <li class="dsq-tt" title="Sakti Dwi Cahyono"><a href="http://disqus.com/sakti/" onclick="return DISQUS.dtpl.actions.fire(&#39;profile.show&#39;, null, &#39;sakti&#39;, false); return false"><img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/avatar32.jpg"></a></li>    <li class="dsq-like-activity">                  and 3 others liked this.          </li>                </ul>            </li>        </ul>            </div>    <div id="dsq-like-tooltip">      <div id="dsq-share-step-1" class="dsq-share-step">        <h3>Glad you liked it. Would you like to share?</h3>        <p class="dsq-tooltip-checkbox"><input type="checkbox" id="dsq-share-thread-facebook" value="Facebook"><label for="dsq-share-thread-facebook"><span class="dsq-facebook">Facebook</span></label></p>        <p class="dsq-tooltip-checkbox"><input type="checkbox" id="dsq-share-thread-twitter" value="Twitter"><label for="dsq-share-thread-twitter"><span class="dsq-twitter">Twitter</span></label></p>        <ul id="dsq-tooltip-actions">                        <li><a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" onclick="DISQUS.dtpl.actions.fire(&#39;thread.share.send&#39;); return false" class="dsq-primary-action">Share</a></li>                    <li><a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" onclick="DISQUS.dtpl.actions.fire(&#39;thread.share.cancel&#39;); return false" class="dsq-secondary-action">No thanks</a></li>        </ul>      </div>      <div id="dsq-share-step-2" class="dsq-share-step" style="display:none !important">        <p>Sharing this page …</p>      </div>      <div id="dsq-share-step-3" class="dsq-share-step" style="display:none !important">        <p>Thanks! <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-tooltip-decline" onclick="DISQUS.dtpl.actions.fire(&#39;thread.share.cancel&#39;); return false">Close</a></p>      </div>    </div>                                            <div class="dsq-notice">              Comments for this page are closed.          </div>        <div id="dsq-sort-by">    <select id="dsq-sort-select" onchange="DISQUS.dtpl.actions.fire(&#39;thread.sort&#39;, this.value);">              <option value="hot" selected="selected">          Sort by popular now        </option>              <option value="best">          Sort by best rating        </option>              <option value="newest">          Sort by newest first        </option>              <option value="oldest">          Sort by oldest first        </option>          </select>  </div>      <h3>            Showing <span id="dsq-num-posts">2</span> comments        </h3>        <ul id="dsq-comments">            <li id="dsq-comment-82307080" data-dsq-comment-id="82307080" class="dsq-comment dsq-clearfix        dsq-comment-is-parent                " style="margin-left:0px;">    <div class="dsq-avatar dsq-tt" title="Expand Pythonlibrary Org Punter&#39;s profile">      <a href="http://disqus.com/guest/5a95a66662a0ec95dafca9df0fa4bd18/" onclick="DISQUS.dtpl.actions.fire(&#39;profile.show&#39;, 82307080, null); return false">        <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/noavatar32.png" class="dsq-deferred-avatar" data-src="http://mediacdn.disqus.com/1326405634/images/noavatar32.png" alt="">      </a>    </div>    <div id="dsq-comment-body-82307080" class="dsq-comment-body">      <div class="dsq-comment-header">        <span class="dsq-commenter-name">Pythonlibrary Org Punter</span>                <span class="dsq-collapsed-count">                      2 comments collapsed                  </span>                <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-collapse-toggle dsq-collapse" title="Collapse thread" onclick="DISQUS.dtpl.actions.fire(&#39;comments.collapse&#39;, 82307080); return false;"><span>Collapse</span></a>        <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-collapse-toggle dsq-expand" title="Expand thread" onclick="DISQUS.dtpl.actions.fire(&#39;comments.expand&#39;, 82307080); return false;"><span>Expand</span></a>      </div>        <div class="dsq-comment-message" id="dsq-comment-message-82307080">                <div class="dsq-comment-text" id="dsq-comment-text-82307080">        &gt; Then we set the text color to red in the first two columns. I admit that I’m not<br>&gt; quite sure how this works as the ending coordinates just don’t seem to fit with<br>&gt; the ones for the background color. I’ll leave that to my readers to explain.<br><br>The numbering used to set the red foreground is consistent with that used for the green background.  (1, -1) simply means the second row (positive indices being 0-based) and the last column (as you say yourself, negative indices are -1-based).  I don't see the confusion.  In case it helps, here are all the cell indices in a 2d list...<br><br>Andrew ;)      </div>                        </div>            <!-- edit box dynamically inserted here -->      <div id="dsq-append-edit-82307080"></div>        <div class="dsq-comment-footer">    <ul class="dsq-comment-actions">              <li id="dsq-like-82307080">          <span class="dsq-like-thumb dsq-font">A</span>          <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" onclick="DISQUS.dtpl.actions.fire(&#39;comments.like&#39;, this,82307080); return false">Like</a>        </li>                     </ul>    <ul class="dsq-comment-meta">      <li>  <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#comment-82307080" onclick="DISQUS.dtpl.actions.fire(&#39;comments.permalink&#39;, 82307080);" title="Link to comment by Pythonlibrary Org Punter">          1 year ago      </a></li>            <li>          <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" id="dsq-comment-like-count-82307080" class="dsq-comment-like-count" onclick="return DISQUS.dtpl.actions.fire(&#39;comments.showUserVotes&#39;, 82307080); return false">1          Like      </a>      </li>              <li class="dsq-comment-flag" style="visibility: hidden">          <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-comment-flag dsq-font" onclick="return DISQUS.dtpl.actions.fire(&#39;comments.report&#39;, 82307080, false);">F</a>        </li>          </ul>  </div>      <!-- reply box dynamically inserted here -->      <div id="dsq-append-reply-82307080"></div>    </div>  </li>  <!-- new replies dynamically inserted here -->  <li id="dsq-append-post-82307080"></li>            <li id="dsq-comment-82358004" data-dsq-comment-id="82358004" class="dsq-comment dsq-clearfix                dsq-moderator        dsq-founder" style="margin-left:46px;">    <div class="dsq-avatar dsq-tt" title="Expand driscollis&#39;s profile">      <a href="http://disqus.com/driscollis/" onclick="DISQUS.dtpl.actions.fire(&#39;profile.show&#39;, 82358004, null); return false">        <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/noavatar32.png" class="dsq-deferred-avatar" data-src="http://mediacdn.disqus.com/uploads/users/261/26/avatar32.jpg?1326222649" alt="">      </a>    </div>    <div id="dsq-comment-body-82358004" class="dsq-comment-body">      <div class="dsq-comment-header">        <span class="dsq-commenter-name">driscollis</span>                <span class="dsq-collapsed-count">                      1 comment collapsed                  </span>                <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-collapse-toggle dsq-collapse" title="Collapse thread" onclick="DISQUS.dtpl.actions.fire(&#39;comments.collapse&#39;, 82358004); return false;"><span>Collapse</span></a>        <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-collapse-toggle dsq-expand" title="Expand thread" onclick="DISQUS.dtpl.actions.fire(&#39;comments.expand&#39;, 82358004); return false;"><span>Expand</span></a>      </div>        <div class="dsq-comment-message" id="dsq-comment-message-82358004">                <div class="dsq-comment-text" id="dsq-comment-text-82358004">        Hi Andrew,<br><br>Well, I know when I first saw them, they confused me. I would have created an example showing one or the other, but not both. Anyway, thanks!<br><br>- Mike      </div>                        </div>            <!-- edit box dynamically inserted here -->      <div id="dsq-append-edit-82358004"></div>        <div class="dsq-comment-footer">    <ul class="dsq-comment-actions">              <li id="dsq-like-82358004">          <span class="dsq-like-thumb dsq-font">A</span>          <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" onclick="DISQUS.dtpl.actions.fire(&#39;comments.like&#39;, this,82358004); return false">Like</a>        </li>                     </ul>    <ul class="dsq-comment-meta">      <li>  <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#comment-82358004" onclick="DISQUS.dtpl.actions.fire(&#39;comments.permalink&#39;, 82358004);" title="Link to comment by driscollis">          1 year ago      </a></li>              <li>          <a onclick="DISQUS.dtpl.actions.fire(&#39;comments.showParent&#39;, 82307080); return false" href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#comment-82307080" title="Jump to comment">            in reply to Pythonlibrary Org Punter          </a>        </li>            <li style="display:none">          <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" id="dsq-comment-like-count-82358004" class="dsq-comment-like-count" onclick="return DISQUS.dtpl.actions.fire(&#39;comments.showUserVotes&#39;, 82358004); return false">0          Like      </a>      </li>              <li class="dsq-comment-flag" style="visibility: hidden">          <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-comment-flag dsq-font" onclick="return DISQUS.dtpl.actions.fire(&#39;comments.report&#39;, 82358004, false);">F</a>        </li>          </ul>  </div>      <!-- reply box dynamically inserted here -->      <div id="dsq-append-reply-82358004"></div>    </div>  </li>  <!-- new replies dynamically inserted here -->  <li id="dsq-append-post-82358004"></li>      </ul>        <div id="dsq-pagination">      <ul id="dsq-footer" class="dsq-clearfix">        <div id="dsq-subscribe">            <li>      <a href="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/#" class="dsq-subscribe-email" onclick="return DISQUS.dtpl.actions.fire(&#39;thread.subscribe&#39;);">        <span class="dsq-font">M</span> <em>Subscribe by email</em>      </a>    </li>    <li>    <a href="http://mousevsthepython.disqus.com/reportlab_tables_8211_creating_tables_in_pdfs_with_python/latest.rss" class="dsq-subscribe-rss">      <span class="dsq-font">S</span> <em>RSS</em>    </a>  </li>    </div>  </ul>    </div>          <h3 class="dsq-h3-reactions">Reactions</h3>    <ul id="dsq-reactions" class="dsq-reactions dsq-clearfix">                <li id="dsq-reaction-28155915">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155915">                    <a target="_blank" href="http://twitter.com/driscollis/status/25317184953">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/IMG_0015_normal.jpg">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155915" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">"Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python" ( <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://bit.ly/djvMEQ</a> )</div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@driscollis</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155916">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155916">                    <a target="_blank" href="http://twitter.com/rolope/status/25206784477">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Rolope_at_Auronix_normal.jpg">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155916" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">RT @FrikiFeeds: Reportlab Tables – Creating Tables in PDFs with Python <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://dlvr.it/5hRWN</a></div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@rolope</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155914">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155914">                    <a target="_blank" href="http://twitter.com/timgluz/status/25187931589">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/0087_normal.jpg">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155914" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">Mike Driscoll: Reportlab Tables – Creating Tables in PDFs with Python <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://bit.ly/9a0duo</a></div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@timgluz</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155909">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155909">                    <a target="_blank" href="http://twitter.com/TuPLE/status/25184409695">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/pylogo_normal.png">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155909" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">RT @planetpython: Mike Driscoll: Reportlab Tables – Creating Tables in PDFs with Python <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://bit.ly/bFFx7K</a></div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@TuPLE</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155907">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155907">                    <a target="_blank" href="http://twitter.com/thepythonist/status/25180424623">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/default_profile_2_normal.png">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155907" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://bit.ly/avvaci</a></div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@thepythonist</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155913">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155913">                    <a target="_blank" href="http://twitter.com/dcreemer_rss/status/25178387472">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/default_profile_3_normal.png">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155913" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">[Python] Mike Driscoll: Reportlab Tables – Creating Tables in PDFs with Python: Back in March of this year, I wrot... <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://bit.ly/bFFx7K</a></div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@dcreemer_rss</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155912">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155912">                    <a target="_blank" href="http://twitter.com/planetpython/status/25177186799">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/python_normal.png">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155912" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">Mike Driscoll: Reportlab Tables – Creating Tables in PDFs with Python <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://bit.ly/bFFx7K</a></div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@planetpython</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155908">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155908">                    <a target="_blank" href="http://twitter.com/FrikiFeeds/status/25176693968">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/bbird01_normal.png">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155908" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">Reportlab Tables – Creating Tables in PDFs with Python <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://dlvr.it/5hRWN</a></div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@FrikiFeeds</div>      </div>    </div>  </li>                <li id="dsq-reaction-28155911">    <div class="dsq-reaction-avatar dsq-avatar dsq-tt" data-dsq-content-id="dsq-reaction-tooltip-28155911">                    <a target="_blank" href="http://twitter.com/driscollis/status/25174896215">                    <img src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/IMG_0015_normal.jpg">                    </a>          </div>    <div id="dsq-reaction-tooltip-28155911" class="dsq-reaction-tooltip" style="display:none">      <div class="dsq-reaction-tooltip-container">        <div class="dsq-reaction-body">Finished writing: "Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python" ( <a href="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python.html">http://bit.ly/djvMEQ</a> )</div>        <div class="dsq-reaction-date">1 year ago</div>        <div class="dsq-reaction-user">@driscollis</div>      </div>    </div>  </li>          </ul>                  <div class="dsq-trackback-url">      Trackback URL      <input onclick="this.select()" readonly="true" value="http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/trackback/">    </div>      </div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px; "><div><iframe id="f39fcab80" name="f146837d1" scrolling="no" style="border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; border-width: initial; border-color: initial; border-image: initial; overflow-x: hidden; overflow-y: hidden; height: 240px; width: 575px; " class="FB_UI_Hidden" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/oauth.html"></iframe></div></div></div></div>
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://www.blog.pythonlibrary.org/2010/09/21/reportlab-tables-creating-tables-in-pdfs-with-python/';
+    var disqus_identifier = '1218 http://www.blog.pythonlibrary.org/?p=1218';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'mousevsthepython';
+    var disqus_title = "Reportlab Tables &#8211; Creating Tables in PDFs with Python";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            DISQUS.request.get('?cf_action=sync_comments&post_id=1218');
+        });
+                    };
+    var facebookXdReceiverPath = 'http://www.blog.pythonlibrary.org/wp-content/plugins/disqus-comment-system/xd_receiver.htm';
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/www.blog.pythonlibrary.org\/2010\/09\/21\/reportlab-tables-creating-tables-in-pdfs-with-python\/trackback\/"    };
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.' + disqus_domain + '/embed.js?pname=wordpress&pver=2.70';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+</div>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5453410411750645";
+/* mvp2 */
+google_ad_slot = "4418292034";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/show_ads.js"></script><ins style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><ins id="aswift_0_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><iframe allowtransparency="true" frameborder="0" height="60" hspace="0" marginwidth="0" marginheight="0" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){i+=&#39;.call&#39;;setTimeout(h,0)}else if(h.match){i+=&#39;.nav&#39;;w.location.replace(h)}s.log&amp;&amp;s.log.push(i)}" scrolling="no" vspace="0" width="468" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+<!--- middle (main content) column content end -->
+</div>
+<div id="sidebar">
+<ul>
+<li id="archivedentry">
+<h2>Archived Entry</h2>
+<ul>
+<li><strong>Post Date :</strong></li>
+<li>Tuesday, Sep 21st, 2010 at 9:16 pm</li>
+<li><strong>Category :</strong></li>
+<li><a href="http://www.blog.pythonlibrary.org/category/cross-platform/" title="View all posts in Cross-Platform" rel="category tag">Cross-Platform</a> and <a href="http://www.blog.pythonlibrary.org/category/python/" title="View all posts in Python" rel="category tag">Python</a></li>
+<li><strong>Tags :</strong></li>
+<li><a href="http://www.blog.pythonlibrary.org/tag/python/" rel="tag">Python</a>, <a href="http://www.blog.pythonlibrary.org/tag/python-pdf-series/" rel="tag">Python PDF Series</a>, <a href="http://www.blog.pythonlibrary.org/tag/reportlab/" rel="tag">Reportlab</a></li>
+<li><strong>Do More :</strong></li>
+<li>You can skip to the end and leave a response. Pinging is currently not allowed.	</li>
+</ul>
+</li>
+<li id="search">
+<h2><label for="s">Search:</label></h2>
+<ul>
+<li>
+<form id="searchform" method="get" action="http://www.blog.pythonlibrary.org/index.php">
+<div style="text-align:center">
+<p><input type="text" name="s" id="s" size="15"></p>
+<p><input type="submit" name="submit" value="Search"></p>
+</div>
+</form>
+</li>
+</ul>
+</li>
+<li id="linkcat-2" class="widget widget_links"><h2>Links</h2><ul><li>
+<ul class="xoxo blogroll">
+<li><a href="http://twitter.com/#!/mousevspython" title="Twitter account">@MouseVsPython</a></li>
+<li><a href="http://www.python.org/" title="A Great Programming Language!">Python</a></li>
+<li><a href="http://www.wxpython.org/" title="My Favorite GUI Wrapper for Python">wxPython</a></li>
+</ul>
+</li></ul></li>
+<li id="archives-3" class="widget widget_archive"><h2>Archives</h2><ul><li>	<select name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;"> <option value="">Select Month</option> <option value="http://www.blog.pythonlibrary.org/2012/01/"> January 2012 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/12/"> December 2011 &nbsp;(8)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/11/"> November 2011 &nbsp;(8)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/10/"> October 2011 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/09/"> September 2011 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/08/"> August 2011 &nbsp;(3)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/07/"> July 2011 &nbsp;(4)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/06/"> June 2011 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/04/"> April 2011 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/03/"> March 2011 &nbsp;(13)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/02/"> February 2011 &nbsp;(7)</option>
+<option value="http://www.blog.pythonlibrary.org/2011/01/"> January 2011 &nbsp;(14)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/12/"> December 2010 &nbsp;(10)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/11/"> November 2010 &nbsp;(4)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/10/"> October 2010 &nbsp;(11)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/09/"> September 2010 &nbsp;(10)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/08/"> August 2010 &nbsp;(7)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/07/"> July 2010 &nbsp;(7)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/06/"> June 2010 &nbsp;(7)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/05/"> May 2010 &nbsp;(9)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/04/"> April 2010 &nbsp;(6)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/03/"> March 2010 &nbsp;(10)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/02/"> February 2010 &nbsp;(23)</option>
+<option value="http://www.blog.pythonlibrary.org/2010/01/"> January 2010 &nbsp;(6)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/12/"> December 2009 &nbsp;(4)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/11/"> November 2009 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/10/"> October 2009 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/09/"> September 2009 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/08/"> August 2009 &nbsp;(3)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/07/"> July 2009 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/06/"> June 2009 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/05/"> May 2009 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/04/"> April 2009 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/03/"> March 2009 &nbsp;(14)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/02/"> February 2009 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2009/01/"> January 2009 &nbsp;(3)</option>
+<option value="http://www.blog.pythonlibrary.org/2008/09/"> September 2008 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2008/08/"> August 2008 &nbsp;(3)</option>
+<option value="http://www.blog.pythonlibrary.org/2008/07/"> July 2008 &nbsp;(1)</option>
+<option value="http://www.blog.pythonlibrary.org/2008/06/"> June 2008 &nbsp;(2)</option>
+<option value="http://www.blog.pythonlibrary.org/2008/05/"> May 2008 &nbsp;(9)</option>
+<option value="http://www.blog.pythonlibrary.org/2008/04/"> April 2008 &nbsp;(4)</option>
+<option value="http://www.blog.pythonlibrary.org/2008/03/"> March 2008 &nbsp;(7)</option>
+</select>
+</li></ul></li>	<li id="recent-posts-3" class="widget widget_recent_entries">	<h2>Recent Posts</h2><ul><li>	<ul>
+<li><a href="http://www.blog.pythonlibrary.org/2012/01/07/reportlab-converting-hundreds-of-images-into-pdfs/" title="Reportlab: Converting Hundreds of Images Into PDFs">Reportlab: Converting Hundreds of Images Into PDFs</a></li>
+<li><a href="http://www.blog.pythonlibrary.org/2012/01/07/january-2012-pyowa-wrap-up/" title="January 2012 Pyowa Wrap Up">January 2012 Pyowa Wrap Up</a></li>
+<li><a href="http://www.blog.pythonlibrary.org/2011/12/31/top-ten-articles-of-2011/" title="Top Ten Articles of 2011">Top Ten Articles of 2011</a></li>
+<li><a href="http://www.blog.pythonlibrary.org/2011/12/21/new-years-python-meme-2012pythonmeme/" title="New Year’s Python Meme – #2012pythonmeme">New Year’s Python Meme – #2012pythonmeme</a></li>
+<li><a href="http://www.blog.pythonlibrary.org/2011/12/15/book-review-numpy-1-5-beginners-guide/" title="Book Review: Numpy 1.5 Beginner’s Guide">Book Review: Numpy 1.5 Beginner’s Guide</a></li>
+</ul>
+</li></ul></li><li id="recent-comments-3" class="widget widget_recent_comments"><h2>Recent Comments</h2><ul><li><ul id="recentcomments"><li class="recentcomments">Jessica 0404 on <a href="http://www.blog.pythonlibrary.org/2011/11/10/wxpython-and-sqlalchemy-an-intro-to-mvc-and-crud/comment-page-1/#comment-23701">wxPython and SqlAlchemy: An Intro to MVC and CRUD</a></li><li class="recentcomments"><a href="http://www.webhostings.in/" rel="external nofollow" class="url">web hosting in india</a> on <a href="http://www.blog.pythonlibrary.org/2011/12/07/python-voted-best-programming-language-3-years-running/comment-page-1/#comment-23699">Python Voted Best Programming Language 3 Years Running</a></li><li class="recentcomments"><a href="http://www.webhostings.in/" rel="external nofollow" class="url">web hosting in india</a> on <a href="http://www.blog.pythonlibrary.org/2011/12/14/wxpython-phoenix-documentation-beta-released/comment-page-1/#comment-23698">wxPython Project Phoenix Documentation Beta Released</a></li><li class="recentcomments"><a href="http://www.webhostings.in/" rel="external nofollow" class="url">web hosting in india</a> on <a href="http://www.blog.pythonlibrary.org/2011/12/21/new-years-python-meme-2012pythonmeme/comment-page-1/#comment-23697">New Year’s Python Meme – #2012pythonmeme</a></li><li class="recentcomments"><a href="http://www.webhostings.in/" rel="external nofollow" class="url">Web Hosting Provider</a> on <a href="http://www.blog.pythonlibrary.org/2012/01/07/reportlab-converting-hundreds-of-images-into-pdfs/comment-page-1/#comment-23692">Reportlab: Converting Hundreds of Images Into PDFs</a></li></ul></li></ul></li>	<li id="calendar">
+<table id="wp-calendar">
+<caption>September 2010</caption>
+<thead>
+<tr>
+<th scope="col" title="Sunday">S</th>
+<th scope="col" title="Monday">M</th>
+<th scope="col" title="Tuesday">T</th>
+<th scope="col" title="Wednesday">W</th>
+<th scope="col" title="Thursday">T</th>
+<th scope="col" title="Friday">F</th>
+<th scope="col" title="Saturday">S</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<td colspan="3" id="prev"><a href="http://www.blog.pythonlibrary.org/2010/08/" title="View posts for August 2010">« Aug</a></td>
+<td class="pad">&nbsp;</td>
+<td colspan="3" id="next"><a href="http://www.blog.pythonlibrary.org/2010/10/" title="View posts for October 2010">Oct »</a></td>
+</tr>
+</tfoot>
+<tbody>
+<tr>
+<td colspan="3" class="pad">&nbsp;</td><td>1</td><td>2</td><td><a href="http://www.blog.pythonlibrary.org/2010/09/03/" title="Pyowa – September 2010 Wrap-Up">3</a></td><td><a href="http://www.blog.pythonlibrary.org/2010/09/04/" title="Python 101: How to Open a File or Program">4</a></td>
+</tr>
+<tr>
+<td>5</td><td>6</td><td>7</td><td>8</td><td><a href="http://www.blog.pythonlibrary.org/2010/09/09/" title="Getting Remote Drive Space on Windows">9</a></td><td><a href="http://www.blog.pythonlibrary.org/2010/09/10/" title="SqlAlchemy: Connecting to pre-existing databases">10</a></td><td>11</td>
+</tr>
+<tr>
+<td>12</td><td>13</td><td>14</td><td><a href="http://www.blog.pythonlibrary.org/2010/09/15/" title="wxPython: A Simple Notebook Example">15</a></td><td>16</td><td>17</td><td>18</td>
+</tr>
+<tr>
+<td>19</td><td>20</td><td><a href="http://www.blog.pythonlibrary.org/2010/09/21/" title="Reportlab Tables – Creating Tables in PDFs with Python">21</a></td><td><a href="http://www.blog.pythonlibrary.org/2010/09/22/" title="Book Preview: Python Graphics Cookbook
+Contest: Create a Logo for My Blog!">22</a></td><td>23</td><td><a href="http://www.blog.pythonlibrary.org/2010/09/24/" title="You Could Speak at PyCon">24</a></td><td>25</td>
+</tr>
+<tr>
+<td>26</td><td><a href="http://www.blog.pythonlibrary.org/2010/09/27/" title="wxPython: PyPlot – Graphs with Python">27</a></td><td>28</td><td>29</td><td>30</td>
+<td class="pad" colspan="2">&nbsp;</td>
+</tr>
+</tbody>
+</table>	</li>
+<li id="tag_cloud-3" class="widget widget_tag_cloud"><h2>Tags</h2><ul><li><div class="tagcloud"><a href="http://www.blog.pythonlibrary.org/tag/binaries/" class="tag-link-65" title="5 topics" style="font-size: 10.8pt;">binaries</a>
+<a href="http://www.blog.pythonlibrary.org/tag/book-preview/" class="tag-link-45" title="2 topics" style="font-size: 8pt;">Book Preview</a>
+<a href="http://www.blog.pythonlibrary.org/tag/book-review/" class="tag-link-19" title="8 topics" style="font-size: 12.386666666667pt;">Book Review</a>
+<a href="http://www.blog.pythonlibrary.org/tag/books/" class="tag-link-46" title="3 topics" style="font-size: 9.12pt;">Books</a>
+<a href="http://www.blog.pythonlibrary.org/tag/configobj/" class="tag-link-26" title="3 topics" style="font-size: 9.12pt;">ConfigObj</a>
+<a href="http://www.blog.pythonlibrary.org/tag/cross-platform/" class="tag-link-8" title="4 topics" style="font-size: 10.053333333333pt;">Cross-Platform</a>
+<a href="http://www.blog.pythonlibrary.org/tag/databases/" class="tag-link-81" title="2 topics" style="font-size: 8pt;">databases</a>
+<a href="http://www.blog.pythonlibrary.org/tag/dialogs/" class="tag-link-49" title="2 topics" style="font-size: 8pt;">Dialogs</a>
+<a href="http://www.blog.pythonlibrary.org/tag/distribution/" class="tag-link-14" title="4 topics" style="font-size: 10.053333333333pt;">Distribution</a>
+<a href="http://www.blog.pythonlibrary.org/tag/django/" class="tag-link-18" title="5 topics" style="font-size: 10.8pt;">Django</a>
+<a href="http://www.blog.pythonlibrary.org/tag/education/" class="tag-link-120" title="3 topics" style="font-size: 9.12pt;">Education</a>
+<a href="http://www.blog.pythonlibrary.org/tag/graphics/" class="tag-link-82" title="2 topics" style="font-size: 8pt;">Graphics</a>
+<a href="http://www.blog.pythonlibrary.org/tag/gui/" class="tag-link-48" title="3 topics" style="font-size: 9.12pt;">GUI</a>
+<a href="http://www.blog.pythonlibrary.org/tag/ironpython/" class="tag-link-17" title="2 topics" style="font-size: 8pt;">IronPython</a>
+<a href="http://www.blog.pythonlibrary.org/tag/microsoft-access/" class="tag-link-90" title="2 topics" style="font-size: 8pt;">microsoft access</a>
+<a href="http://www.blog.pythonlibrary.org/tag/oop/" class="tag-link-72" title="2 topics" style="font-size: 8pt;">OOP</a>
+<a href="http://www.blog.pythonlibrary.org/tag/packaging/" class="tag-link-13" title="4 topics" style="font-size: 10.053333333333pt;">Packaging</a>
+<a href="http://www.blog.pythonlibrary.org/tag/psf/" class="tag-link-16" title="2 topics" style="font-size: 8pt;">PSF</a>
+<a href="http://www.blog.pythonlibrary.org/tag/pycon/" class="tag-link-3" title="21 topics" style="font-size: 16.026666666667pt;">PyCon</a>
+<a href="http://www.blog.pythonlibrary.org/tag/pycon-2010/" class="tag-link-31" title="13 topics" style="font-size: 14.253333333333pt;">PyCon 2010</a>
+<a href="http://www.blog.pythonlibrary.org/tag/pycon-2011/" class="tag-link-85" title="22 topics" style="font-size: 16.213333333333pt;">PyCon 2011</a>
+<a href="http://www.blog.pythonlibrary.org/tag/pycon-2012/" class="tag-link-153" title="3 topics" style="font-size: 9.12pt;">PyCon 2012</a>
+<a href="http://www.blog.pythonlibrary.org/tag/pyowa/" class="tag-link-25" title="9 topics" style="font-size: 12.853333333333pt;">Pyowa</a>
+<a href="http://www.blog.pythonlibrary.org/tag/python/" class="tag-link-4" title="95 topics" style="font-size: 22pt;">Python</a>
+<a href="http://www.blog.pythonlibrary.org/tag/python-101/" class="tag-link-76" title="2 topics" style="font-size: 8pt;">Python 101</a>
+<a href="http://www.blog.pythonlibrary.org/tag/python-advocacy/" class="tag-link-152" title="3 topics" style="font-size: 9.12pt;">Python Advocacy</a>
+<a href="http://www.blog.pythonlibrary.org/tag/python-pdf-series/" class="tag-link-38" title="3 topics" style="font-size: 9.12pt;">Python PDF Series</a>
+<a href="http://www.blog.pythonlibrary.org/tag/pywin32/" class="tag-link-9" title="6 topics" style="font-size: 11.453333333333pt;">PyWin32</a>
+<a href="http://www.blog.pythonlibrary.org/tag/registry/" class="tag-link-41" title="2 topics" style="font-size: 8pt;">Registry</a>
+<a href="http://www.blog.pythonlibrary.org/tag/reportlab/" class="tag-link-36" title="4 topics" style="font-size: 10.053333333333pt;">Reportlab</a>
+<a href="http://www.blog.pythonlibrary.org/tag/sizer/" class="tag-link-29" title="4 topics" style="font-size: 10.053333333333pt;">sizer</a>
+<a href="http://www.blog.pythonlibrary.org/tag/sphinx/" class="tag-link-22" title="2 topics" style="font-size: 8pt;">Sphinx</a>
+<a href="http://www.blog.pythonlibrary.org/tag/sqlalchemy/" class="tag-link-28" title="9 topics" style="font-size: 12.853333333333pt;">SqlAlchemy</a>
+<a href="http://www.blog.pythonlibrary.org/tag/sqlite/" class="tag-link-80" title="2 topics" style="font-size: 8pt;">sqlite</a>
+<a href="http://www.blog.pythonlibrary.org/tag/system-admin/" class="tag-link-30" title="13 topics" style="font-size: 14.253333333333pt;">System Admin</a>
+<a href="http://www.blog.pythonlibrary.org/tag/testing/" class="tag-link-40" title="2 topics" style="font-size: 8pt;">Testing</a>
+<a href="http://www.blog.pythonlibrary.org/tag/tip/" class="tag-link-60" title="2 topics" style="font-size: 8pt;">TIP</a>
+<a href="http://www.blog.pythonlibrary.org/tag/turbogears/" class="tag-link-21" title="5 topics" style="font-size: 10.8pt;">TurboGears</a>
+<a href="http://www.blog.pythonlibrary.org/tag/tutorial/" class="tag-link-12" title="2 topics" style="font-size: 8pt;">Tutorial</a>
+<a href="http://www.blog.pythonlibrary.org/tag/windows/" class="tag-link-6" title="19 topics" style="font-size: 15.653333333333pt;">Windows</a>
+<a href="http://www.blog.pythonlibrary.org/tag/wxgrid/" class="tag-link-42" title="2 topics" style="font-size: 8pt;">wxGrid</a>
+<a href="http://www.blog.pythonlibrary.org/tag/wxpython/" class="tag-link-10" title="62 topics" style="font-size: 20.32pt;">wxPython</a>
+<a href="http://www.blog.pythonlibrary.org/tag/xml/" class="tag-link-111" title="2 topics" style="font-size: 8pt;">XML</a>
+<a href="http://www.blog.pythonlibrary.org/tag/xml-parsing-series/" class="tag-link-110" title="2 topics" style="font-size: 8pt;">XML Parsing Series</a>
+<a href="http://www.blog.pythonlibrary.org/tag/xrc/" class="tag-link-44" title="2 topics" style="font-size: 8pt;">XRC</a></div>
+</li></ul></li><li id="meta-3" class="widget widget_meta"><h2>Members</h2><ul><li>	<ul>
+<li><a href="http://www.blog.pythonlibrary.org/wp-login.php">Log in</a></li>
+<li><a href="http://www.blog.pythonlibrary.org/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="http://mousevsthepython.disqus.com/latest.rss" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+</ul>
+</li></ul></li>
+</ul>
+</div>
+<div id="footer">
+<p><small>
+<a href="http://www.blog.pythonlibrary.org/" title="The Mouse Vs. The Python">The Mouse Vs. The Python</a>
+is powered by	<a href="http://wordpress.org/" title="Powered by WordPress 3.3.1, state-of-the-art semantic personal publishing platform">WordPress 3.3.1</a>
+and delivered to you in 1.027 seconds using 51 queries.	<br>
+Theme: <a href="http://ajaydsouza.com/wordpress/wpthemes/connections-reloaded/" title="Powered by Connections Reloaded">Connections Reloaded</a> by <a href="http://ajaydsouza.com/" title="Visit Ajay&#39;s Blog">Ajay D'Souza</a>. Derived from <a href="http://vanillamist.com/blog/" title="Connections Theme">Connections</a>.
+</small></p>
+<script type="text/javascript" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/widgets.js"></script>
+<script type="text/javascript" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/plusone(1).js"></script>
+<script type="text/javascript">
+		// PrintFriendly
+		var e = document.createElement('script'); e.type="text/javascript"; e.async = true; 
+		e.src = '//cdn.printfriendly.com/printfriendly.js';
+		document.getElementsByTagName('head')[0].appendChild(e);
+	</script>
+</div> <!-- End id="footer" -->
+</div> <!-- End id="main" -->
+</div> <!-- End id="rap" -->
+
+
+<!-- Dynamic Page Served (once) in 1.028 seconds -->
+<iframe name="easyXDM_DISQUS_net_default2604_provider" id="easyXDM_DISQUS_net_default2604_provider" style="position: absolute; top: -2000px; left: 0px; " frameborder="0" src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/def.html"></iframe><script src="./Reportlab Tables – Creating Tables in PDFs with Python « The Mouse Vs. The Python_files/saved_resource(1)" charset="UTF-8"></script></body></html>

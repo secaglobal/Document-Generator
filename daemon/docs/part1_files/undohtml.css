@@ -1,0 +1,40 @@
+/* undohtml turns off browser default settings and brings browsers back to a more common start point */
+/* undohtml.css */
+/* (CC) 2004 Tantek Celik. Some Rights Reserved. */
+/* http://creativecommons.org/licenses/by/2.0 */
+/* This style sheet is licensed under a Creative Commons License. */
+
+/* Purpose: undo some of the default styling of common (X)HTML browsers */
+
+/* no list-markers by default, since lists are used more often for semantics */
+ul, ol { list-style: none; }
+
+/* avoid browser default inconsistent heading font-sizes */
+/* and pre/code too */
+h1, h2, h3, h4, h5, h6, pre, code { font-size: 1em; }
+
+/* remove the inconsistent (among browsers) default ul,ol padding or margin  */
+/* the default spacing on headings does not match nor align with 
+   normal interline spacing at all, so let's get rid of it. */
+/* zero out the spacing around pre, form, body, html, p, blockquote as well */
+/* form elements are oddly inconsistent, and not quite CSS emulatable. */
+/*  nonetheless strip their margin and padding as well */
+*, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, body, html, p, blockquote, fieldset, input, textarea, button
+{ margin: 0; padding: 0; }
+
+fieldset { border: none; }
+
+/* whoever thought blue linked image borders were a good idea? */
+img, a img, :link img, :visited img { border: none; vertical-align:top}
+
+/* de-italicize address */
+address { font-style: normal; }
+
+/* more varnish stripping as necessary... */
+* { margin: 0; padding: 0; }
+/*
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin: 1em 5%; }
+li, dd { margin-left: 5%; }
+fieldset { padding: .5em; } 
+*/
+button { background: transparent; border: none; }
